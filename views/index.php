@@ -1,8 +1,7 @@
 
 <?php
-    $bdd = new PDO('mysql:host=158.69.48.57;dbname=Items;charset=utf8', 'knapsak5', 
-    'xQ14pnGDu6Wc');
-    $bdd->prepare("execute");
+    $bd = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
+    $pdo = $bd->getPDO();
 ?>
 <?php 
     require 'partials/head.php';
