@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <<<<<<<< HEAD:index.php
 <!DOCTYPE html>
 <html lang="en">
@@ -319,12 +318,3 @@
 <?php
 require 'partials/footer.php';
 >>>>>>>> 74e79310a8814d4e74c9e96dde79309e0bf2daa5:views/index.php
-=======
-<?php
-require 'src/router.php';
-require 'src/functions.php';
-require 'src/configuration.php';
-require 'src/error-config.php';
-
-route(urlPath());
->>>>>>> 74e79310a8814d4e74c9e96dde79309e0bf2daa5
