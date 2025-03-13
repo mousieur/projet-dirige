@@ -268,4 +268,3 @@
     </section>
 <?php
 require 'partials/footer.php';
->>>>>>>> 74e79310a8814d4e74c9e96dde79309e0bf2daa5:views/index.php
