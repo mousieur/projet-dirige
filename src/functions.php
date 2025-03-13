@@ -69,8 +69,8 @@ function isAdministrator() : bool
 function isValidEmail($email):bool {
     return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 }
-function emailAlreadyExist(UserModel $userModel, $email) {
-    return !empty($userModel->selectByEmail($email));
+function emailAlreadyExist(ModelJoueur $joueur, $email) {
+    return !empty($joueur->selectByEmail($email));
 }
 function isValidPassword(string $password): bool {
     return strlen(trim($password)) > 7;
