@@ -1,62 +1,14 @@
 <<<<<<<< HEAD:index.php
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <title>projet dirigé</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/templatemo.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-</head>
 <?php
     $bdd = new PDO('mysql:host=158.69.48.57;dbname=Items;charset=utf8', 'knapsak5', 
-'xQ14pnGDu6Wc');
+    'xQ14pnGDu6Wc');
     $bdd->prepare("execute");
 ?>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light shadow w-100 px-4">
-        <div class="container-fluid d-flex justify-content-between align-items-center m-1">
-            <a class="navbar-brand text-success logo h1" href="index.html">
-                G.A.R.S
-            </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="templatemo_main_nav">
-                <div class="d-flex align-items-center">
-                    <a class="nav-icon position-relative text-decoration-none fs-3 px-4" href="#">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark"></i>
-                        <span class="position-absolute top-0 start-75 translate-middle badge rounded-pill bg-light text-dark">7</span>
-                    </a>
-                    <div class="fs-3">Alias</div>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="fa fa-fw fa-user text-dark fs-4"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end">
-                            <li><a class="dropdown-item" href="#">Inventaire</a></li>
-                            <li><a class="dropdown-item" href="#">Enigma</a></li>
-                            <li><a class="dropdown-item" href="#">Paramètre du compte</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Déconnexion</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
+<?php 
+    require 'partials/head.php';
+    require 'partials/navigation.php';
+?>
     <section class="bg-light">
         <div class="row">
             <div class="col-lg-2 bg-secondary text-dark border-end border-dark-subtle shadow p-4">
