@@ -1,4 +1,3 @@
-<<<<<<<< HEAD:index.php
 
 <?php
     $bdd = new PDO('mysql:host=158.69.48.57;dbname=Items;charset=utf8', 'knapsak5', 
