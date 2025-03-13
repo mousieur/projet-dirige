@@ -15,7 +15,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 </head>
-
+<?php
+    $bdd = new PDO('mysql:host=158.69.48.57;dbname=Items;charset=utf8', 'knapsak5', 
+'xQ14pnGDu6Wc');
+    $bdd->prepare("execute");
+?>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light shadow w-100 px-4">
         <div class="container-fluid d-flex justify-content-between align-items-center m-1">
@@ -29,10 +33,11 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="templatemo_main_nav">
                 <div class="d-flex align-items-center">
-                    <a class="nav-icon position-relative text-decoration-none fs-3 px-3" href="#">
+                    <a class="nav-icon position-relative text-decoration-none fs-3 px-4" href="#">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+                        <span class="position-absolute top-0 start-75 translate-middle badge rounded-pill bg-light text-dark">7</span>
                     </a>
+                    <div class="fs-3">Alias</div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -80,8 +85,8 @@
                     <h1 class="h1">Items disponibles</h1>
                 </div>
             </div>
-            <!-- source du template d'un item : https://templatemo.com/tm-559-zay-shop -->
-            <div class="row">
+            <!-- source de départ du template d'un item : https://templatemo.com/tm-559-zay-shop -->
+            <div class="row d-flex">
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
                         <a href="shop-single.html">
@@ -98,7 +103,10 @@
                                 </li>
                                 <li class="text-muted text-right">$240.00</li>
                             </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Flesh light</a>
+                            <div class="d-flex justify-content-between">
+                                <a href="shop-single.html" class="h2 text-decoration-none text-dark">Flesh light</a>
+                                <span class="text-light pt-2">18 lbs</span>
+                            </div>
                             <p class="card-text">
                                 la lumière suce
                             </p>
@@ -122,7 +130,10 @@
                                 </li>
                                 <li class="text-muted text-right">$480.00</li>
                             </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Bust down watch</a>
+                            <div class="d-flex justify-content-between">
+                                <a href="shop-single.html" class="h2 text-decoration-none text-dark">Bust down watch</a>
+                                <span class="text-light pt-2">18 lbs</span>
+                            </div>
                             <p class="card-text">
                                 Full iced out Rolex Daytona
                             </p>
@@ -146,7 +157,10 @@
                                 </li>
                                 <li class="text-muted text-right">$360.00</li>
                             </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Appareil Photo</a>
+                            <div class="d-flex justify-content-between">
+                                <a href="shop-single.html" class="h2 text-decoration-none text-dark">Appareil photo</a>
+                                <span class="text-light pt-2">18 lbs</span>
+                            </div>
                             <p class="card-text">
                                 Parfait pour prendre des photos de sa graine
                             </p>
