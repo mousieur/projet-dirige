@@ -41,7 +41,7 @@ function view($path, $attributes = []) : void
 {
     extract($attributes);
 
-    require "views/{$path}";
+    require "views/{$path}.php";
 }
 
 function sessionStart() : void

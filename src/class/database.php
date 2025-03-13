@@ -11,7 +11,7 @@ class Database
         try {
 
             // conn va contenir l'objet PDO
-            $this->conn = new PDO("mysql:host=".$dbConfig["hostname"].";dbname=".$dbConfig["database"], $dbConfig["username"], $dbConfig["password"], $dbParams);
+            $this->conn = new PDO("mysql:host=".$dbConfig["hostname"].";dbname=".$dbConfig["database"].";charset=utf8", $dbConfig["username"], $dbConfig["password"], $dbParams);
           
         } catch(PDOException $e) {
             
