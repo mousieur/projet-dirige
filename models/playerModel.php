@@ -1,6 +1,6 @@
 <?php
 
-class playerModel {
+class PlayerModel {
     public function __construct(private PDO $pdo) {}
 
     public function selectAll(): array|null {

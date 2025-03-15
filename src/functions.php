@@ -1,5 +1,5 @@
 <?php 
-require_once 'models/ModelJoueur.php';
+require_once 'models/playerModel.php';
 function urlActive(string|array $paths, string $class) : string
 {
     $path = uriPath();

@@ -6,7 +6,7 @@ class ItemModel {
         $items = [];
 
         try {
-            $stm = $this->pdo->prepare("SELECT idItems, nomItem, quantiteStock, itemType, prixUnitaire, poids, utilite, photo FROM item;");
+            $stm = $this->pdo->prepare("SELECT idItems, nomItem, quantiteStock, itemType, prixUnitaire, poids, utilite, photo FROM Items;");
             $stm->execute();
             $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
@@ -20,7 +20,7 @@ class ItemModel {
                         $row['prixUnitaire'],
                         $row['poids'],
                         $row['utilite'],
-                        $row['photo']
+                        $row['photo'],
                     );
                 }
                 return $items;

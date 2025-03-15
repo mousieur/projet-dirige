@@ -1,8 +1,3 @@
-
-<?php
-    $bd = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
-    $pdo = $bd->getPDO();
-?>
 <?php 
     require 'partials/head.php';
     require 'partials/navigation.php';
