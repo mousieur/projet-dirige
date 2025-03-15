@@ -35,7 +35,7 @@
             <div class="row d-flex">
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="shop-single.html">
+                        <a href="/details">
                             <img src="public/img/img.jpg" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
@@ -50,7 +50,7 @@
                                 <li class="text-muted text-right">$240.00</li>
                             </ul>
                             <div class="d-flex justify-content-between">
-                                <a href="shop-single.html" class="h2 text-decoration-none text-dark">Flesh light</a>
+                                <a href="/details" class="h2 text-decoration-none text-dark">Flesh light</a>
                                 <span class="text-light pt-2">18 lbs</span>
                             </div>
                             <p class="card-text">
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="shop-single.html">
+                        <a href="/details">
                             <img src="public/img/img.jpg" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
@@ -77,7 +77,7 @@
                                 <li class="text-muted text-right">$480.00</li>
                             </ul>
                             <div class="d-flex justify-content-between">
-                                <a href="shop-single.html" class="h2 text-decoration-none text-dark">Bust down watch</a>
+                                <a href="/details" class="h2 text-decoration-none text-dark">Bust down watch</a>
                                 <span class="text-light pt-2">18 lbs</span>
                             </div>
                             <p class="card-text">
@@ -89,7 +89,7 @@
                 </div>
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="shop-single.html">
+                        <a href="/details">
                             <img src="public/img/img.jpg" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
@@ -104,7 +104,7 @@
                                 <li class="text-muted text-right">$360.00</li>
                             </ul>
                             <div class="d-flex justify-content-between">
-                                <a href="shop-single.html" class="h2 text-decoration-none text-dark">Appareil photo</a>
+                                <a href="/details" class="h2 text-decoration-none text-dark">Appareil photo</a>
                                 <span class="text-light pt-2">18 lbs</span>
                             </div>
                             <p class="card-text">

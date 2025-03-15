@@ -1,7 +1,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light shadow w-100 px-4">
         <div class="container-fluid d-flex justify-content-between align-items-center m-1">
-            <a class="navbar-brand text-success logo h1" href="index.html">
+            <a class="navbar-brand text-success logo h1" href="#">
                 G.A.R.S
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
