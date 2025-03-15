@@ -1,2 +1,2 @@
 <?php
-view('cart');
+view('cart', []);

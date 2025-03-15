@@ -17,7 +17,7 @@ function isPost() {
     return $_SERVER['REQUEST_METHOD'] === 'POST';
 }
 
-function dd(mixed $data, bool $die = true): void { #Die and Dump
+function dd(mixed $data, bool $die = true): void {
     echo "<pre>";
     var_dump($data);
     echo "</pre>";

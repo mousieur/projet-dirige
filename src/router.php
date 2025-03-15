@@ -11,10 +11,9 @@ function urlPath() : string {
     return $path;
 
 }
-function route(string $route, array $params = null) : void 
+function route(string $route, array $params) : void 
 {
     $routeValid = false;
-
     if (array_key_exists($route, ROUTES)) {
 
         $controllerFile = 'controllers/' . ROUTES[$route];

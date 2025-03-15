@@ -33,7 +33,7 @@ class ItemModel {
 
     public function selectById(int $idItems): Item|null {
         try {
-            $stm = $this->pdo->prepare("SELECT idItems, nomItem, quantiteStock, itemType, prixUnitaire, poids, utilite, photo FROM item WHERE idItems = :idItems;");
+            $stm = $this->pdo->prepare("SELECT idItems, nomItem, quantiteStock, itemType, prixUnitaire, poids, utilite, photo FROM Items WHERE idItems = :idItems;");
             $stm->bindValue(":idItems", $idItems, PDO::PARAM_INT);
             $stm->execute();
             $data = $stm->fetch(PDO::FETCH_ASSOC);

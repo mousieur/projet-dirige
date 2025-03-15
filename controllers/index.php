@@ -8,4 +8,4 @@ $pdo = $db->getPDO();
 $itemModel = new itemModel($pdo);
 $items = $itemModel->selectAll();
 
-view('index');
+view('index', []);
