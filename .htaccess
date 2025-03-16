@@ -1,0 +1,8 @@
+# Active le moteur de réécriture des règles
+RewriteEngine On
+
+# Permet l'accès au répertoire "public" (IMPORTANT : pour utiliser des images ou css par exemple !!)
+RewriteRule ^(public) - [L]
+
+# Redirige automatiquement tous les autres URL vers index.php (dans la racine)
+RewriteRule ^(.*)$ index.php [L,QSA]
