@@ -10,6 +10,4 @@ $itemModel = new itemModel($pdo);
 $items = $itemModel->selectAll();
 
 view('cart', 
-[
-    'items' => $items
-]);
+[]);

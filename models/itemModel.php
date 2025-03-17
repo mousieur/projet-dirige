@@ -6,10 +6,8 @@ class ItemModel {
         $items = [];
 
         try {
-            $stm = $this->pdo->prepare("SELECT idItems, nomItem, quantiteStock, itemType, prixUnitaire, poids, utilite, photo FROM Items;");
-            $stm->execute();
-            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
-
+            $result = $this->pdo->query("call GetAllItems;");
+            $data = $result->fetch();
             if (!empty($data)) {
                 foreach ($data as $row) {
                     $items[] = new Item(
@@ -27,7 +25,7 @@ class ItemModel {
             }
             return null;
         } catch (PDOException $e) {
-            throw new PDOException($e->getMessage(), $e->getCode());
+            throw new PDOException($e->getMessage(), 1);
         }
     }
 
