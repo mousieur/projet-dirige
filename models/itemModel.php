@@ -79,4 +79,16 @@ class ItemModel {
             throw new PDOException($e->getMessage(), 1);
         }
     }
+    public function updateItemInPanier(int $idJoueur, int $idItem, int $quantite): void {
+        try {
+            $stm = $this->pdo->prepare("call updateItemInPanier(?, ?, ?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->bindParam(2, $idItem);
+            $stm->bindParam(3, $quantite);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+
 }
