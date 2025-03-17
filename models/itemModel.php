@@ -8,10 +8,7 @@ class ItemModel {
         try {
             $result = $this->pdo->query("call GetAllItems;");
             $data = $result->fetchAll();
-<<<<<<< HEAD
-=======
             
->>>>>>> c9d3805018a19ef36201acc76171db2e819597a7
             if (!empty($data)) {
                 foreach ($data as $row) {
                     $items[] = new Item(
@@ -82,4 +79,16 @@ class ItemModel {
             throw new PDOException($e->getMessage(), 1);
         }
     }
+    public function updateItemInPanier(int $idJoueur, int $idItem, int $quantite): void {
+        try {
+            $stm = $this->pdo->prepare("call updateItemInPanier(?, ?, ?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->bindParam(2, $idItem);
+            $stm->bindParam(3, $quantite);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+
 }

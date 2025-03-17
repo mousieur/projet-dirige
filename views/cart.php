@@ -2,6 +2,13 @@
     require 'partials/head.php';
     require 'partials/navigation.php';
 ?>
+<script>
+    function callPHPFunction(value, idItem) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "updateCart?val=" + encodeURIComponent(value) + "&idItem=" + encodeURIComponent(idItem), true);
+        xhr.send();
+    }
+</script>
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8">
@@ -11,16 +18,12 @@
                         <img src="public/img/img.jpg" class="rounded" alt="Product">
                         <h5 class="mb-0 flex-grow-1 ms-3"><?=$item['nomItem']?></h5>
                         <p class="mb-0">$<span class="product-price"><?=$item['prixUnitaire']?></span></p>
-                        <div class="d-flex align-items-center mx-3">
-                            <button class="btn btn-success btn-sm minus-btn"><i class="fas fa-minus"></i></button>
-                                <span class="quantity mx-2"><?=$item['quantite']?></span>
-                            <button class="btn btn-success btn-sm plus-btn"><i class="fas fa-plus"></i></button>
-                        </div>
+                        <input type="number" class="form-control" value="<?=$item['quantite']?>" style="width: 60px;" onchange="callPHPFunction(this.value, <?= $item['idItem'] ?>)">
                         <button class="btn fs-3">
                             <i class="fas fa-trash"></i>
-                        </button>
+                        </button> 
                     </div>
-                <?php endforeach; ?>
+                <?php endforeach;?>
             </div>
         </div>
         <div class="col-md-4">
