@@ -8,6 +8,7 @@ class ItemModel {
         try {
             $result = $this->pdo->query("call GetAllItems;");
             $data = $result->fetchAll();
+            
             if (!empty($data)) {
                 foreach ($data as $row) {
                     $items[] = new Item(
