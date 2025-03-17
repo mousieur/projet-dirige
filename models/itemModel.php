@@ -7,11 +7,11 @@ class ItemModel {
 
         try {
             $result = $this->pdo->query("call GetAllItems;");
-            $data = $result->fetch();
+            $data = $result->fetchAll();
             if (!empty($data)) {
                 foreach ($data as $row) {
                     $items[] = new Item(
-                        $row['idItems'],
+                        $row['idItem'],
                         $row['nomItem'],
                         $row['quantiteStock'],
                         $row['itemType'],
@@ -31,7 +31,7 @@ class ItemModel {
 
     public function selectById(int $idItems): Item|null {
         try {
-            $stm = $this->pdo->prepare("SELECT idItems, nomItem, quantiteStock, itemType, prixUnitaire, poids, utilite, photo FROM Items WHERE idItems = :idItems;");
+            $stm = $this->pdo->prepare("call ;");
             $stm->bindValue(":idItems", $idItems, PDO::PARAM_INT);
             $stm->execute();
             $data = $stm->fetch(PDO::FETCH_ASSOC);
@@ -51,6 +51,31 @@ class ItemModel {
             return null;
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+    public function getPanierById(int $idJoueur): array|null {
+        try {
+            $stm = $this->pdo->prepare("call getPanierById(?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+            $output = [];
+            if (!empty($data)) {
+                foreach ($data as $row) {
+                    $output[] = [
+                        'idItem' => $row['idItem'],
+                        'quantite' => $row['quantite'],
+                        'prixUnitaire' => $row['prixUnitaire'],
+                        'nomItem' => $row['nomItem'],
+                        'photo' => $row['photo'],
+                        'poids' => $row['poids']
+                    ];
+                }
+                return $output;
+            }
+            return null;
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
         }
     }
 }

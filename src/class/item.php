@@ -2,7 +2,7 @@
 
 class Item {
     public function __construct(
-        public int $idItems,
+        public int $idItem,
         public string $nomItem,
         public int $quantiteStock,
         public string $itemType,
