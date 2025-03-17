@@ -33,87 +33,53 @@
             </div>
             <!-- source de départ du template d'un item : https://templatemo.com/tm-559-zay-shop -->
             <div class="row d-flex">
+                <?php
+
+                foreach ($items as $item) {
+
+                    $nbComment = 0;
+                    $totalStars = 0;
+                    
+                    foreach ($comments as $comment) {
+                        if ($item->idItem == $comment->idItem) {
+                            $nbComment++;
+                            $totalStars += $comment->etoiles;
+                        }
+                    }
+                    
+                    $avgStars = $nbComment > 0 ? floor($totalStars / $nbComment) : 0;
+                    
+                ?>
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="/details">
+                        <a href="/details?idItem=<?= $item->idItem ?>">
                             <img src="public/img/img.jpg" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
                             <ul class="list-unstyled d-flex justify-content-between">
                                 <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
+                                    <?php 
+                                    for ($i = 1; $i <= 5; $i++)
+                                        if($i <= $avgStars) 
+                                            echo '<i class="text-warning fa fa-star"></i>';
+                                        else
+                                            echo '<i class="text-muted fa fa-star"></i>';
+                                    ?>
                                 </li>
-                                <li class="text-muted text-right">$240.00</li>
+                                <li class="text-muted text-right"><?= $item->prixUnitaire ?> $</li>
                             </ul>
                             <div class="d-flex justify-content-between">
-                                <a href="/details" class="h2 text-decoration-none text-dark">Flesh light</a>
-                                <span class="text-light pt-2">18 lbs</span>
+                                <a href="/details" class="h2 text-decoration-none text-dark"><?= $item->nomItem ?></a>
+                                <span class="text-light pt-2"><?= $item->poids ?> lbs</span>
                             </div>
                             <p class="card-text">
-                                la lumière suce
+                            <?= $item->quantiteStock ?> disponibles
                             </p>
-                            <p class="text-muted">Avis (56)</p>
+                            <p class="text-muted">Avis (<?=$nbComment?>)</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="/details">
-                            <img src="public/img/img.jpg" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$480.00</li>
-                            </ul>
-                            <div class="d-flex justify-content-between">
-                                <a href="/details" class="h2 text-decoration-none text-dark">Bust down watch</a>
-                                <span class="text-light pt-2">18 lbs</span>
-                            </div>
-                            <p class="card-text">
-                                Full iced out Rolex Daytona
-                            </p>
-                            <p class="text-muted">Avis (5)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="/details">
-                            <img src="public/img/img.jpg" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$360.00</li>
-                            </ul>
-                            <div class="d-flex justify-content-between">
-                                <a href="/details" class="h2 text-decoration-none text-dark">Appareil photo</a>
-                                <span class="text-light pt-2">18 lbs</span>
-                            </div>
-                            <p class="card-text">
-                                Parfait pour prendre des photos de sa graine
-                            </p>
-                            <p class="text-muted">Avis (7)</p>
-                        </div>
-                    </div>
-                </div>
+                <?php }?>
             </div>
         </div>
     </div>
