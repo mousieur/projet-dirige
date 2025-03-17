@@ -6,6 +6,6 @@ $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 
 $itemModel = new itemModel($pdo);
-//$items = $itemModel->selectAll();
+$items = $itemModel->selectAll();
 
 view('index', []);
