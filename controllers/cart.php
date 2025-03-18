@@ -8,8 +8,8 @@ if (!isset($_SESSION['idJoueur'])) {
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 
-$itemModel = new itemModel($pdo);
-$items = $itemModel->getPanierById($_SESSION['idJoueur']);
+$playerModel = new PlayerModel($pdo);
+$items = $playerModel->getPanierById($_SESSION['idJoueur']);
 
 $total = 0;
 $poids = 0;

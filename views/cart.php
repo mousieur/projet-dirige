@@ -19,7 +19,7 @@
                         <h5 class="mb-0 flex-grow-1 ms-3"><?=$item['nomItem']?></h5>
                         <p class="mb-0">$<span class="product-price"><?=$item['prixUnitaire']?></span></p>
                         <input type="number" class="form-control" value="<?=$item['quantite']?>" style="width: 60px;" onchange="callPHPFunction(this.value, <?= $item['idItem'] ?>)">
-                        <button class="btn fs-3">
+                        <button class="btn fs-3" href="/updateCart?val=0&idItem=<?=$item['idItem']?>">
                             <i class="fas fa-trash"></i>
                         </button> 
                     </div>
@@ -30,7 +30,11 @@
             <div class="card p-3 shadow">
                 <h4>Total (<?=$count?>): <?=$total?>$</h4>
                 <h4>Poids : <?=$poids?>lbs</h4>
-                <button class="btn btn-success w-100 mt-3">Payer</button>
+                <button class="btn btn-success w-100 mt-3" href="/payCart">Payer</button>
+                <div>
+                    <p class="text-danger"><?= $_SESSION['messageCaps'] ?></p>
+                    <p class="text-danger"><?= $_SESSION['messagePoids'] ?></p>
+                </div>
             </div>
         </div>
     </div>

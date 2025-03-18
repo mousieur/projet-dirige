@@ -93,4 +93,63 @@ class PlayerModel {
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
+    public function getInventaireById(int $idJoueur): array|null {
+        try {
+            $stm = $this->pdo->prepare("call getInventaireById(?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+            $output = [];
+            if (!empty($data)) {
+                foreach ($data as $row) { //pas sure des attributs que la procedure retourne
+                    $output[] = [
+                        'idItem' => $row['idItem'],
+                        'quantite' => $row['quantite'],
+                        'prixUnitaire' => $row['prixUnitaire'],
+                        'nomItem' => $row['nomItem'],
+                        'photo' => $row['photo'],
+                        'poids' => $row['poids']
+                    ];
+                }
+                return $output;
+            }
+            return null;
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+    public function getPanierById(int $idJoueur): array|null {
+        try {
+            $stm = $this->pdo->prepare("call getPanierById(?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+            $output = [];
+            if (!empty($data)) {
+                foreach ($data as $row) {
+                    $output[] = [
+                        'idItem' => $row['idItem'],
+                        'quantite' => $row['quantite'],
+                        'prixUnitaire' => $row['prixUnitaire'],
+                        'nomItem' => $row['nomItem'],
+                        'photo' => $row['photo'],
+                        'poids' => $row['poids']
+                    ];
+                }
+                return $output;
+            }
+            return null;
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+    function payCart(int $idJoueur): void {
+        try {
+            $stm = $this->pdo->prepare("call BuyPanier(?)");
+            $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
 }

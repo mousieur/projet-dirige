@@ -10,6 +10,7 @@ const ROUTES = [
     '/cart' => 'cart.php',
     '/details' => 'details.php',
     '/updateCart' => 'updateCart.php',
+    '/payCart' => 'payCart.php',
 ];
 
 const DB_PARAMS = [
