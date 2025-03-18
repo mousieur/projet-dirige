@@ -62,7 +62,7 @@ class ItemModel {
 
     public function selectById(int $idItems): Item|null {
         try {
-            $stm = $this->pdo->prepare("SELECT idItems, nomItem, quantiteStock, itemType, prixUnitaire, poids, utilite, photo FROM Items WHERE idItems = :idItems;");
+            $stm = $this->pdo->prepare("call ;");
             $stm->bindValue(":idItems", $idItems, PDO::PARAM_INT);
             $stm->execute();
             $data = $stm->fetch(PDO::FETCH_ASSOC);
@@ -84,144 +84,41 @@ class ItemModel {
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
-    public function getAllArmes(): array|null {
-        $items = [];
-
+    public function getPanierById(int $idJoueur): array|null {
         try {
-            $result = $this->pdo->prepare("call GetAllArmes;");
-            $result->execute();
-            $data = $result->fetchAll();
-            
+            $stm = $this->pdo->prepare("call getPanierById(?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+            $output = [];
             if (!empty($data)) {
                 foreach ($data as $row) {
-                    $items[] = new Item(
-                        $row['idItem'],
-                        $row['nomItem'],
-                        $row['quantiteStock'],
-                        $row['itemType'],
-                        $row['prixUnitaire'],
-                        $row['poids'],
-                        $row['utilite'],
-                        $row['photo'],
-                    );
+                    $output[] = [
+                        'idItem' => $row['idItem'],
+                        'quantite' => $row['quantite'],
+                        'prixUnitaire' => $row['prixUnitaire'],
+                        'nomItem' => $row['nomItem'],
+                        'photo' => $row['photo'],
+                        'poids' => $row['poids']
+                    ];
                 }
-                return $items;
+                return $output;
             }
             return null;
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), 1);
         }
     }
-    public function getAllMunitions(): array|null {
-        $items = [];
-
+    public function updateItemInPanier(int $idJoueur, int $idItem, int $quantite): void {
         try {
-            $result = $this->pdo->prepare("call getAllMunitions;");
-            $result->execute();
-            $data = $result->fetchAll();
-            
-            if (!empty($data)) {
-                foreach ($data as $row) {
-                    $items[] = new Item(
-                        $row['idItem'],
-                        $row['nomItem'],
-                        $row['quantiteStock'],
-                        $row['itemType'],
-                        $row['prixUnitaire'],
-                        $row['poids'],
-                        $row['utilite'],
-                        $row['photo'],
-                    );
-                }
-                return $items;
-            }
-            return null;
+            $stm = $this->pdo->prepare("call updateItemInPanier(?, ?, ?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->bindParam(2, $idItem);
+            $stm->bindParam(3, $quantite);
+            $stm->execute();
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), 1);
         }
     }
-    public function getAllMedicaments(): array|null {
-        $items = [];
 
-        try {
-            $result = $this->pdo->prepare("call getAllMedicaments;");
-            $result->execute();
-            $data = $result->fetchAll();
-            
-            if (!empty($data)) {
-                foreach ($data as $row) {
-                    $items[] = new Item(
-                        $row['idItem'],
-                        $row['nomItem'],
-                        $row['quantiteStock'],
-                        $row['itemType'],
-                        $row['prixUnitaire'],
-                        $row['poids'],
-                        $row['utilite'],
-                        $row['photo'],
-                    );
-                }
-                return $items;
-            }
-            return null;
-        } catch (PDOException $e) {
-            throw new PDOException($e->getMessage(), 1);
-        }
-    }
-    public function getAllArmures(): array|null {
-        $items = [];
-
-        try {
-            $result = $this->pdo->prepare("call getAllArmures;");
-            $result->execute();
-            $data = $result->fetchAll();
-            
-            if (!empty($data)) {
-                foreach ($data as $row) {
-                    $items[] = new Item(
-                        $row['idItem'],
-                        $row['nomItem'],
-                        $row['quantiteStock'],
-                        $row['itemType'],
-                        $row['prixUnitaire'],
-                        $row['poids'],
-                        $row['utilite'],
-                        $row['photo'],
-                    );
-                }
-                return $items;
-            }
-            return null;
-        } catch (PDOException $e) {
-            throw new PDOException($e->getMessage(), 1);
-        }
-    }
-    public function getAllNourritures(): array|null {
-        $items = [];
-
-        try {
-            $result = $this->pdo->prepare("call getAllNourritures;");
-            $result->execute();
-            $data = $result->fetchAll();
-            
-            if (!empty($data)) {
-                foreach ($data as $row) {
-                    $items[] = new Item(
-                        $row['idItem'],
-                        $row['nomItem'],
-                        $row['quantiteStock'],
-                        $row['itemType'],
-                        $row['prixUnitaire'],
-                        $row['poids'],
-                        $row['utilite'],
-                        $row['photo'],
-                    );
-                }
-                return $items;
-            }
-            return null;
-        } catch (PDOException $e) {
-            throw new PDOException($e->getMessage(), 1);
-        }
-    }
 }
