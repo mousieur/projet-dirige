@@ -6,23 +6,39 @@
         <div class="row">
             <div class="col-lg-2 bg-secondary text-dark border-end border-dark-subtle shadow p-4">
                 <form method="post">
-                    <div class="input-group mb-4">
-                        <input type="text" class="form-control" placeholder="Nom">
-                        <div class="input-group-append input-group-lg">
-                          <button class="btn btn-outline-light" type="submit"><i class="fa fa-search"></i></button>
-                        </div>
-                      </div>
-                    <div class="fw-bold">Catégorie</div>
-                    <input type="checkbox" name="armes" class="form-check-input">
-                    <label for="armes">Armes</label><br>
-                    <input type="checkbox" name="munitions" class="form-check-input">
-                    <label for="munitions">Munitions</label><br>
-                    <input type="checkbox" name="armures" class="form-check-input">
-                    <label for="armures">Armures</label><br>
-                    <input type="checkbox" name="nourritures" class="form-check-input">
-                    <label for="nourritures">Nourritures</label><br>
-                    <input type="checkbox" name="medicaments" class="form-check-input">
-                    <label for="medicaments">Medicaments</label><br>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="search" placeholder="Nom">
+                        <button class="btn btn-outline-light" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <div class="fw-bold mb-2">Catégorie</div>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" id="armes" name="armes" class="form-check-input">
+                        <label for="armes" class="form-check-label">Armes</label>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" id="munitions" name="munitions" class="form-check-input">
+                        <label for="munitions" class="form-check-label">Munitions</label>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" id="armures" name="armures" class="form-check-input">
+                        <label for="armures" class="form-check-label">Armures</label>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" id="nourritures" name="nourritures" class="form-check-input">
+                        <label for="nourritures" class="form-check-label">Nourritures</label>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" id="medicaments" name="medicaments" class="form-check-input">
+                        <label for="medicaments" class="form-check-label">Médicaments</label>
+                    </div>
                 </form>
             </div>
         <div class=" col-lg-9 p-5 m-auto">
@@ -36,18 +52,13 @@
                 <?php
 
                 foreach ($items as $item) {
-
-                    $nbComment = 0;
                     $totalStars = 0;
-                    
-                    foreach ($comments as $comment) {
-                        if ($item->idItem == $comment->idItem) {
-                            $nbComment++;
+
+                    $comments = $commentModel->getCommentsByIdItem($item->idItem);
+                    foreach ($comments as $comment)
                             $totalStars += $comment->etoiles;
-                        }
-                    }
                     
-                    $avgStars = $nbComment > 0 ? floor($totalStars / $nbComment) : 0;
+                    $avgStars = count($comments) > 0 ? floor($totalStars / count($comments)) : 0;
                     
                 ?>
                 <div class="col-12 col-md-4 mb-4">
@@ -75,7 +86,7 @@
                             <p class="card-text">
                             <?= $item->quantiteStock ?> disponibles
                             </p>
-                            <p class="text-muted">Avis (<?=$nbComment?>)</p>
+                            <p class="text-muted">Avis (<?=count($comments)?>)</p>
                         </div>
                     </div>
                 </div>
