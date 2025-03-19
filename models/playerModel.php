@@ -3,6 +3,20 @@
 class PlayerModel {
     public function __construct(private PDO $pdo) {}
 
+    public function createUser(string $alias, string $nom, string $prenom, string $email, string $password): void {
+        try {
+            $stmt = $this->pdo->prepare('CALL CreatePlayer(:alias, :nom, :prenom, :email, :password)');
+            $stmt->bindValue(':alias', $alias, PDO::PARAM_STR);
+            $stmt->bindValue(':nom', $nom, PDO::PARAM_STR);
+            $stmt->bindValue(':prenom', $prenom, PDO::PARAM_STR);
+            $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+            $stmt->bindValue(':password', $password, PDO::PARAM_STR);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+
     public function selectAll(): array|null {
         $players = [];
 
