@@ -13,7 +13,7 @@
                 <div class="d-flex align-items-center">
                     <a class="nav-icon position-relative text-decoration-none fs-3 px-3" href="/cart">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark"><?=$itemCount?></span>
                     </a>
                     <div class="btn-group">
                         <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

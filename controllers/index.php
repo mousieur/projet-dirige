@@ -12,6 +12,13 @@ $items = $itemModel->selectAll();
 
 $commentModel = new CommentModel($pdo);
 
+$itemCount = 0;
+if(isset($_SESSION['idJoueur'])){
+    $itemsForCount = $playerModel->getPanierById($_SESSION['idJoueur']);
+    foreach ($itemsForCount as $iteme) {
+        $itemCount += $iteme['quantite'];
+    }
+}
 
 if (isPost()) {
 
@@ -30,4 +37,9 @@ if (isPost()) {
         $items += $itemModel->getAllMedicaments();
 }
 
-require 'views/index.php';
+view('index', 
+[
+    'itemCount' => $itemCount,
+    'items' => $items,
+    'commentModel' => $commentModel
+]);
