@@ -101,11 +101,11 @@ class PlayerModel {
             $data = $stm->fetchAll(PDO::FETCH_ASSOC);
             $output = [];
             if (!empty($data)) {
-                foreach ($data as $row) { //pas sure des attributs que la procedure retourne
+                foreach ($data as $row) {
                     $output[] = [
                         'idItem' => $row['idItem'],
                         'quantite' => $row['quantite'],
-                        'prixUnitaire' => $row['prixUnitaire'],
+                        'prixDeVente' => $row['prixDeVente'],
                         'nomItem' => $row['nomItem'],
                         'photo' => $row['photo'],
                         'poids' => $row['poids']
