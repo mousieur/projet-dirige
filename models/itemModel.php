@@ -96,6 +96,65 @@ class ItemModel {
         }
     }
 
+    public function getItemsByType(string $type): array|null {
+        $items = [];
+
+        try {
+            $result = $this->pdo->prepare("call GetItemsByType(:type);");
+            $result->bindValue(":type", $type, PDO::PARAM_STR);
+            $result->execute();
+            $data = $result->fetchAll();
+
+            if (!empty($data)) {
+                foreach ($data as $row) {
+                    $items[] = new Item(
+                        $row['idItem'],
+                        $row['nomItem'],
+                        $row['quantiteStock'],
+                        $row['itemType'],
+                        $row['prixUnitaire'],
+                        $row['poids'],
+                        $row['utilite'],
+                        $row['photo'],
+                    );
+                }
+                return $items;
+            }
+            return null;
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+    public function getItemsByTypes(array $types): array {
+        $items = [];
+
+        try {
+            foreach ($types as $type) {
+                $result = $this->pdo->prepare("call GetItemsByType(:type);");
+                $result->bindValue(":type", $type, PDO::PARAM_STR);
+                $result->execute();
+                $data = $result->fetchAll();
+
+                if (!empty($data)) {
+                    foreach ($data as $row) {
+                        $items[] = new Item(
+                            $row['idItem'],
+                            $row['nomItem'],
+                            $row['quantiteStock'],
+                            $row['itemType'],
+                            $row['prixUnitaire'],
+                            $row['poids'],
+                            $row['utilite'],
+                            $row['photo'],
+                        );
+                    }
+                }
+            }
+            return $items;
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
     public function getItemDetailsByType(int $idItem, string $itemType) : array|null {
         try {
             switch ($itemType) {

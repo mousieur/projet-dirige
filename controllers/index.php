@@ -12,6 +12,15 @@ $items = $itemModel->selectAll();
 
 $commentModel = new CommentModel($pdo);
 
+$search = "";
+$arme = "";
+$munition = "";
+$armure = "";
+$nourriture = "";
+$medicament = "";
+
+const ITEM_TYPES = ['Arme', 'Munition', 'Armure', 'Nourriture', 'Medicament'];
+
 $itemCount = 0;
 if(isset($_SESSION['idJoueur'])){
     $itemsForCount = $playerModel->getPanierById($_SESSION['idJoueur']);
@@ -21,25 +30,39 @@ if(isset($_SESSION['idJoueur'])){
 }
 
 if (isPost()) {
+    $currentItemTypes = getCurrentItemTypes();
+    $search = getSanitizedSearch();
 
-    if(!empty($_POST['search']))
-        $items = $itemModel->searchItemsByName($_POST['search']);
+    if (!empty($currentItemTypes) && !empty($search)) {
+        $currentItemsByItemTypes = $itemModel->getItemsByTypes($currentItemTypes);
+        $currentItemsBySearch = $itemModel->searchItemsByName($search);
+        $items = compareObjectsByID($currentItemsBySearch, $currentItemsByItemTypes);
+    } elseif (!empty($currentItemTypes)) {
+        $items = $itemModel->getItemsByTypes($currentItemTypes);
+    } elseif (!empty($search)) {
+        $items = $itemModel->searchItemsByName($search);
+    }
 
-    if(!empty($_POST['armes']))
-        $items += $itemModel->getAllArmes();
-    if(!empty($_POST['munitions']))
-        $items += $itemModel->getAllMunitions();
-    if(!empty($_POST['armures']))
-        $items += $itemModel->getAllArmures();
-    if(!empty($_POST['nourritures']))
-        $items += $itemModel->getAllNourritures();
-    if(!empty($_POST['medicaments']))
-        $items += $itemModel->getAllMedicaments();
+    $arme = empty($_POST['Arme']) ? "" : "checked";
+    $munition = empty($_POST['Munition']) ? "" : "checked";
+    $armure = empty($_POST['Armure']) ? "" : "checked";
+    $nourriture = empty($_POST['Nourriture']) ? "" : "checked";
+    $medicament = empty($_POST['Medicament']) ? "" : "checked";
 }
 
-view('index', 
-[
-    'itemCount' => $itemCount,
-    'items' => $items,
-    'commentModel' => $commentModel
-]);
+require 'views/index.php';
+
+function getCurrentItemTypes(): array {
+    $currentItemTypes = [];
+    foreach (ITEM_TYPES as $itemType) {
+        if (!empty($_POST[$itemType])) {
+            $currentItemTypes[] = htmlspecialchars($itemType, ENT_QUOTES, 'UTF-8');
+        }
+    }
+    return $currentItemTypes;
+}
+
+function getSanitizedSearch(): string {
+    $search = isset($_POST['Search']) ? trim($_POST['Search']) : "";
+    return htmlspecialchars($search, ENT_QUOTES, 'UTF-8');
+}

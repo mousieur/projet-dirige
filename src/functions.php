@@ -75,3 +75,16 @@ function emailAlreadyExist(ModelJoueur $joueur, $email) {
 function isValidPassword(string $password): bool {
     return strlen(trim($password)) > 7;
 }
+function compareObjectsByID(array $array1, array $array2): array {
+    $result = [];
+
+    foreach ($array1 as $obj1) {
+        foreach ($array2 as $obj2) {
+            if (isset($obj1->idItem, $obj2->idItem) && $obj1->idItem === $obj2->idItem) {
+                $result[] = $obj1;
+                break;
+            }
+        }
+    }
+    return $result;
+}
