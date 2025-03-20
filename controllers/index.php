@@ -50,12 +50,7 @@ if (isPost()) {
     $medicament = empty($_POST['Medicament']) ? "" : "checked";
 }
 
-view('index', 
-[
-    'itemCount' => $itemCount,
-    'items' => $items,
-    'commentModel' => $commentModel
-]);
+require 'views/index.php';
 
 function getCurrentItemTypes(): array {
     $currentItemTypes = [];
