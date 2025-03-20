@@ -21,6 +21,14 @@ $medicament = "";
 
 const ITEM_TYPES = ['Arme', 'Munition', 'Armure', 'Nourriture', 'Medicament'];
 
+$itemCount = 0;
+if(isset($_SESSION['idJoueur'])){
+    $itemsForCount = $playerModel->getPanierById($_SESSION['idJoueur']);
+    foreach ($itemsForCount as $iteme) {
+        $itemCount += $iteme['quantite'];
+    }
+}
+
 if (isPost()) {
     $currentItemTypes = getCurrentItemTypes();
     $search = getSanitizedSearch();
@@ -42,7 +50,12 @@ if (isPost()) {
     $medicament = empty($_POST['Medicament']) ? "" : "checked";
 }
 
-require 'views/index.php';
+view('index', 
+[
+    'itemCount' => $itemCount,
+    'items' => $items,
+    'commentModel' => $commentModel
+]);
 
 function getCurrentItemTypes(): array {
     $currentItemTypes = [];

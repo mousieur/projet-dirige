@@ -54,45 +54,43 @@
                     foreach ($items as $item) {
                         $totalStars = 0;
 
-                        $comments = $commentModel->getCommentsByIdItem($item->idItem);
-                        foreach ($comments as $comment)
-                                $totalStars += $comment->etoiles;
-                        
-                        $avgStars = count($comments) > 0 ? floor($totalStars / count($comments)) : 0;
-                        
-                    ?>
-                    <div class="col-12 col-md-4 mb-4">
-                        <div class="card h-100">
-                            <a href="/details?idItem=<?= $item->idItem ?>">
-                                <img src="public/img/<?=$item->photo?>" class="img-responsive img-thumnails card-img-top" alt="...">
-                            </a>
-                            <div class="card-body">
-                                <ul class="list-unstyled d-flex justify-content-between">
-                                    <li>
-                                        <?php 
-                                        for ($i = 1; $i <= 5; $i++)
-                                            if($i <= $avgStars) 
-                                                echo '<i class="text-warning fa fa-star"></i>';
-                                            else
-                                                echo '<i class="text-muted fa fa-star"></i>';
-                                        ?>
-                                    </li>
-                                    <li class="text-muted text-right"><?= $item->prixUnitaire ?> $</li>
-                                </ul>
-                                <div class="d-flex justify-content-between">
-                                    <a href="/details" class="h2 text-decoration-none text-dark"><?= $item->nomItem ?></a>
-                                    <span class="text-light pt-2"><?= $item->poids ?> lbs</span>
-                                </div>
-                                <p class="card-text">
-                                <?= $item->quantiteStock ?> disponibles
-                                </p>
-                                <p class="text-muted">Avis (<?=count($comments)?>)</p>
+                    $comments = $commentModel->getCommentsByIdItem($item->idItem);
+                    foreach ($comments as $comment)
+                            $totalStars += $comment->etoiles;
+                    
+                    $avgStars = count($comments) > 0 ? floor($totalStars / count($comments)) : 0;
+                    
+                ?>
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="/details?idItem=<?= $item->idItem ?>">
+                            <img src="public/img/<?=$item->photo?>" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <?php 
+                                    for ($i = 1; $i <= 5; $i++)
+                                        if($i <= $avgStars) 
+                                            echo '<i class="text-warning fa fa-star"></i>';
+                                        else
+                                            echo '<i class="text-muted fa fa-star"></i>';
+                                    ?>
+                                </li>
+                                <li class="text-muted text-right"><?= $item->prixUnitaire ?> $</li>
+                            </ul>
+                            <div class="d-flex justify-content-between">
+                                <a href="/details" class="h2 text-decoration-none text-dark"><?= $item->nomItem ?></a>
+                                <span class="text-light pt-2"><?= $item->poids ?> lbs</span>
                             </div>
+                            <p class="card-text">
+                            <?= $item->quantiteStock ?> disponibles
+                            </p>
+                            <p class="text-muted">Avis (<?=count($comments)?>)</p>
                         </div>
                     </div>
-                    <?php
-                    }
-                }?>
+                </div>
+                <?php }?>
             </div>
         </div>
     </div>

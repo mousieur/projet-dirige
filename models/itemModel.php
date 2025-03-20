@@ -62,14 +62,14 @@ class ItemModel {
 
     public function selectById(int $idItems): Item|null {
         try {
-            $stm = $this->pdo->prepare("call ;");
-            $stm->bindValue(":idItems", $idItems, PDO::PARAM_INT);
+            $stm = $this->pdo->prepare("SELECT idItem, nomItem, quantiteStock, itemType, prixUnitaire, poids, utilite, photo FROM Items WHERE idItem = :idItem");
+            $stm->bindValue(":idItem", $idItems, PDO::PARAM_INT);
             $stm->execute();
             $data = $stm->fetch(PDO::FETCH_ASSOC);
 
             if (!empty($data)) {
                 return new Item(
-                    $data['idItems'],
+                    $data['idItem'],
                     $data['nomItem'],
                     $data['quantiteStock'],
                     $data['itemType'],
@@ -155,4 +155,33 @@ class ItemModel {
             throw new PDOException($e->getMessage(), 1);
         }
     }
+    public function getItemDetailsByType(int $idItem, string $itemType) : array|null {
+        try {
+            switch ($itemType) {
+                case 'Arme':
+                    $stm = $this->pdo->prepare("SELECT * FROM Armes WHERE idArme = :idItem");
+                    break;
+                case 'Munition':
+                    $stm = $this->pdo->prepare("SELECT * FROM Munitions WHERE idMunition = :idItem");
+                    break;
+                case 'Armure':
+                    $stm = $this->pdo->prepare("SELECT * FROM Armures WHERE idArmure = :idItem");
+                    break;
+                case 'Nourriture':
+                    $stm = $this->pdo->prepare("SELECT * FROM Nourritures WHERE idNourriture = :idItem");
+                    break;
+                case 'Medicament':
+                    $stm = $this->pdo->prepare("SELECT * FROM Medicaments WHERE idMedicament = :idItem");
+                    break;
+                default:
+                    return null;
+            }
+            $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
+            $stm->execute();
+            return $stm->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+
 }
