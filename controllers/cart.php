@@ -1,15 +1,47 @@
 <?php
 require_once 'models/itemModel.php';
 require_once 'src/class/item.php';
+
+require_once 'models/playerModel.php';
+require_once 'src/class/player.php';
+
 sessionStart();
 if (!isset($_SESSION['idJoueur'])) {
-    $_SESSION['idJoueur'] = 1;
+    $_SESSION['idJoueur'] = 1; // sera un redirect à l'index
 }
+$idJoueur = $_SESSION['idJoueur'];
+
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 
 $playerModel = new PlayerModel($pdo);
-$items = $playerModel->getPanierById($_SESSION['idJoueur']);
+$items = $playerModel->getPanierById($idJoueur);
+
+$playerModel = new playerModel($pdo);
+$player = $playerModel->selectById($idJoueur);
+$panier = $playerModel->getPanierById($idJoueur);
+$total = 0;
+
+foreach ($panier as $item) {
+    $total += $item['prixUnitaire'] * $item['quantite'];
+}
+$poidsPanier = $playerModel->getPoidsPanierById($idJoueur);
+
+$PoidsInventaire = $playerModel->getPoidsInventaireById($idJoueur);
+
+
+if($player->caps < $total){
+    $_SESSION['messageCaps'] = "Vous n'avez pas assez de caps pour acheter ces items";
+}
+else{
+    $_SESSION['messageCaps'] = "";
+}
+if($player->poidsMax < $poidsPanier + $PoidsInventaire){
+    $_SESSION['messagePoids'] = "Vous avez dépassé le poids maximum de votre inventaire, vous perderiez de la dextérité";
+}
+else{
+    $_SESSION['messagePoids'] = "";
+}
 
 $total = 0;
 $poids = 0;
@@ -24,5 +56,6 @@ view('cart',
     'items' => $items,
     'total' => $total,
     'poids' => $poids,
-    'count' => $count
+    'count' => $count,
+    'itemCount' => $count
 ]);

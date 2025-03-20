@@ -52,7 +52,7 @@ class PlayerModel {
 
     public function selectById(int $idJoueur): Player|null {
         try {
-            $stm = $this->pdo->prepare("SELECT idJoueur, alias, nom, prenom, caps, dexterite, pointsDeVie, poidsMax, photo, couleur, email, password FROM user WHERE idJoueur = :idJoueur;");
+            $stm = $this->pdo->prepare("SELECT * FROM Joueurs WHERE idJoueur = :idJoueur;");
             $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
             $stm->execute();
             $data = $stm->fetch(PDO::FETCH_ASSOC);
@@ -70,7 +70,7 @@ class PlayerModel {
                     $data['photo'],
                     $data['couleur'],
                     $data['email'],
-                    $data['password']
+                    $data['pasword']
                 );
             }
             return null;
@@ -162,6 +162,26 @@ class PlayerModel {
             $stm = $this->pdo->prepare("call BuyPanier(?)");
             $stm->bindParam(1, $idJoueur);
             $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+    function getPoidsInventaireById(int $idJoueur): int {
+        try {
+            $stm = $this->pdo->prepare("call GetPoidsInventaireById(?)");
+            $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+            return (int)$stm->fetch()[0];
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+    function getPoidsPanierById(int $idJoueur): int {
+        try {
+            $stm = $this->pdo->prepare("call GetPoidsPanierById(?)");
+            $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+            return (int)$stm->fetch()[0];
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), $e->getCode());
         }
