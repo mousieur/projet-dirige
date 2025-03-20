@@ -9,4 +9,8 @@ class Commentaire
         public string $date,
         public int $etoiles
     ) {}
+
+    public function getEtoiles(): int {
+        return $this->etoiles;
+    }
 }
