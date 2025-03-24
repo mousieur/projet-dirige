@@ -15,10 +15,10 @@
             <div class="list-group" id="product-list">
                 <?php foreach($items as $item): ?>
                     <div class="list-group-item d-flex align-items-center justify-content-between shadow p-3 mb-3">
-                        <img src="public/img/img.jpg" class="rounded" alt="Product">
+                        <img src="public/img/<?=$item["photo"]?>" class="rounded" alt="Product">
                         <h5 class="mb-0 flex-grow-1 ms-3"><?=$item['nomItem']?></h5>
                         <p class="mb-0">$<span class="product-price"><?=$item['prixUnitaire']?></span></p>
-                        <input type="number" class="form-control" value="<?=$item['quantite']?>" style="width: 60px;" onchange="callPHPFunction(this.value, <?= $item['idItem'] ?>)">
+                        <input type="number" class="form-control" value="<?=$item['quantite']?>" style="width: 80px;" onchange="callPHPFunction(this.value, <?= $item['idItem'] ?>)">
                         <a class="btn fs-3" href="/updateCart?val=0&idItem=<?=$item['idItem']?>">
                             <i class="fas fa-trash"></i>
                         </a> 

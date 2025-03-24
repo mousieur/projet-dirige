@@ -19,7 +19,7 @@ if ($item_id > 0) {
     // Vérifiez si $item est un objet et transformez-le en tableau
     if (is_object($item)) {
         $item = [
-            'idItems' => $item->getIdItems(),
+            'idItem' => $item->getIdItems(),
             'nomItem' => $item->getNomItem(),
             'quantiteStock' => $item->getQuantiteStock(),
             'itemType' => $item->getItemType(),
@@ -30,7 +30,7 @@ if ($item_id > 0) {
         ];
     }
 
-    $itemDetails = $itemModel->getItemDetailsByType($item['idItems'], $item['itemType']);
+    $itemDetails = $itemModel->getItemDetailsByType($item['idItem'], $item['itemType']);
 
     if (is_object($itemDetails)) {
         $itemDetails = (array) $itemDetails;

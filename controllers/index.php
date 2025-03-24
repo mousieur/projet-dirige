@@ -21,13 +21,6 @@ $medicament = "";
 
 const ITEM_TYPES = ['Arme', 'Munition', 'Armure', 'Nourriture', 'Medicament'];
 
-$itemCount = 0;
-if(isset($_SESSION['idJoueur'])){
-    $itemsForCount = $playerModel->getPanierById($_SESSION['idJoueur']);
-    foreach ($itemsForCount as $iteme) {
-        $itemCount += $iteme['quantite'];
-    }
-}
 
 if (isPost()) {
     $currentItemTypes = getCurrentItemTypes();

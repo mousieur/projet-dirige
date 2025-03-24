@@ -14,7 +14,6 @@ $idJoueur = $_SESSION['idJoueur'];
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 
-$playerModel = new PlayerModel($pdo);
 
 $playerModel = new playerModel($pdo);
 $player = $playerModel->selectById($idJoueur);
@@ -58,6 +57,5 @@ view('cart',
     'items' => $panier,
     'total' => $total,
     'poids' => $poids,
-    'count' => $count,
-    'itemCount' => $count
+    'count' => $count
 ]);

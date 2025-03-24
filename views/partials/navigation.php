@@ -1,3 +1,19 @@
+<?php
+    $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
+    $pdo = $db->getPDO();
+    $playerModel = new playerModel($pdo);
+
+    $itemCount = 0;
+    if(isset($_SESSION['idJoueur'])){
+        $itemsForCount = $playerModel->getPanierById($_SESSION['idJoueur']);
+        if($itemsForCount !== null){
+            foreach ($itemsForCount as $iteme) {
+                $itemCount += $iteme['quantite'];
+            }
+        }
+    }
+?>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-light shadow w-100 px-4">
         <div class="container-fluid d-flex justify-content-between align-items-center m-1">
