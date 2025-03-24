@@ -28,20 +28,13 @@ if(isPost()) {
     if (empty($errorMessage['password']) && empty($errorMessage['username'])) {
         $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
         $pdo = $db->getPDO();
-        $userModel = new PlayerModel($pdo);
+        $playerModel = new PlayerModel($pdo);
 
-        if($userModel->connectPlayer($connection['username'], $connection['password'])) {
+        if($playerModel->connectPlayer($connection['username'], $connection['password'])) {
             
-            if(!empty($user)) {
-                if($user->active === 0) {
-                    redirect('/compteInactif');
-                } else {
-                    sessionStart();
-                    $_SESSION['user'] = $user;
-                    redirect('/');
-                }
-
-            }
+            $player = $playerModel->getPlayerByAlias($connection['username']);
+            $_SESSION['idJoueur'] = $player->idJoueur;
+            redirect('/');
         } else {
             $errorMessage['user'] = "Le courriel ou le mot de passe est invalide";
         }
