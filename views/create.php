@@ -10,7 +10,7 @@ require 'partials/navigation.php';
                 <div class="card mt-5">
                     <div class="card-body">
                         <h2 class="card-title text-center">Créer un compte</h2>
-                        <form action="/controllers/createAccount.php" method="POST">
+                        <form action="/controllers/create.php" method="POST">
                             <div class="mb-3">
                                 <label for="alias" class="form-label">Alias</label>
                                 <input type="text" class="form-control" id="alias" name="alias" required>
