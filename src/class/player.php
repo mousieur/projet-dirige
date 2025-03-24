@@ -3,7 +3,7 @@
 class Player 
 {
     public function __construct(
-        readonly public int $idJoueur,
+        public int $idJoueur,
         public string $alias,
         public string $nom,
         public string $prenom,

@@ -1,8 +1,9 @@
 <?php
+    sessionStart();
     $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
     $pdo = $db->getPDO();
     $playerModel = new playerModel($pdo);
-
+    $alias = "";
     $itemCount = 0;
     if(isset($_SESSION['idJoueur'])){
         $itemsForCount = $playerModel->getPanierById($_SESSION['idJoueur']);
@@ -11,6 +12,9 @@
                 $itemCount += $iteme['quantite'];
             }
         }
+
+        $player = $playerModel->getPlayerById($_SESSION['idJoueur']);
+        $alias = $player->alias;
     }
     sessionStart();
 ?>
@@ -32,11 +36,15 @@
                         <i class="fa fa-fw fa-cart-arrow-down text-dark"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark"><?=$itemCount?></span>
                     </a>
+                    <div>
+                        <?=$alias?>
+                    </div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-fw fa-user text-dark fs-4"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end">
+<<<<<<< HEAD
                             <?php if(isset($_SESSION['idJoueur'])): ?>
                                 <li><a class="dropdown-item" href="/inventory">Inventaire</a></li>
                                 <li><a class="dropdown-item" href="#">Enigma</a></li>
@@ -49,6 +57,20 @@
                                 <li><a class="dropdown-item" href="/connection">Connexion</a></li>
                                 <li><a class="dropdown-item" href="/createAccount">S'inscrire</a></li>
                             <?php endif ?>
+=======
+                            <li><a class="dropdown-item" href="#">Inventaire</a></li>
+                            <li><a class="dropdown-item" href="#">Enigma</a></li>
+                            <li><a class="dropdown-item" href="#">Paramètre du compte</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <?php if(!empty($alias)){?>
+                            <li><a class="dropdown-item" href="./deconnection">Déconnexion</a></li>
+                            <?php } else {?>
+                            <li><a class="dropdown-item" href="./connection">connexion</a></li>
+                            <li><a class="dropdown-item" href="./createAccount">Création de compte</a></li>
+                            <?php }?>
+>>>>>>> e39efdf721e6a5dbb28732d0a19d280c02671a79
                         </ul>
                     </div>
                 </div>

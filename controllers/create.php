@@ -30,3 +30,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: /connection.php');
     exit();
 }
+
+require_once 'views/create.php';

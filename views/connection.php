@@ -10,12 +10,12 @@ require 'partials/navigation.php';
 <?php } ?>
 <form action="" method="POST">
     <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" value="<?=$connection['email']?>">
-        <span class="text-danger"><?=$errorMessage['email']?></span>
+        <label for="username" class="form-label">Alias</label>
+        <input type="text" class="form-control" id="alias" name="username" value="<?=$connection['username']?>">
+        <span class="text-danger"><?=$errorMessage['username']?></span>
     </div>
     <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
+        <label for="password" class="form-label">Mot de passe</label>
         <input type="password" class="form-control" id="password" name="password" value="<?=$connection['password']?>">
         <span class="text-danger"><?=$errorMessage['password']?></span>
     </div>
