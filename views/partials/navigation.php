@@ -44,33 +44,18 @@
                             <i class="fa fa-fw fa-user text-dark fs-4"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end">
-<<<<<<< HEAD
-                            <?php if(isset($_SESSION['idJoueur'])): ?>
-                                <li><a class="dropdown-item" href="/inventory">Inventaire</a></li>
-                                <li><a class="dropdown-item" href="#">Enigma</a></li>
-                                <li><a class="dropdown-item" href="#">Paramètre du compte</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Déconnexion</a></li>
-                            <?php else: ?>
-                                <li><a class="dropdown-item" href="/connection">Connexion</a></li>
-                                <li><a class="dropdown-item" href="/createAccount">S'inscrire</a></li>
-                            <?php endif ?>
-=======
+                            <?php if(!empty($alias)){?>
                             <li><a class="dropdown-item" href="#">Inventaire</a></li>
                             <li><a class="dropdown-item" href="#">Enigma</a></li>
                             <li><a class="dropdown-item" href="#">Paramètre du compte</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <?php if(!empty($alias)){?>
                             <li><a class="dropdown-item" href="./deconnection">Déconnexion</a></li>
                             <?php } else {?>
-                            <li><a class="dropdown-item" href="./connection">connexion</a></li>
+                            <li><a class="dropdown-item" href="./connection">Connexion</a></li>
                             <li><a class="dropdown-item" href="./createAccount">Création de compte</a></li>
                             <?php }?>
->>>>>>> e39efdf721e6a5dbb28732d0a19d280c02671a79
                         </ul>
                     </div>
                 </div>
