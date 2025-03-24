@@ -11,6 +11,7 @@ const ROUTES = [
     '/details' => 'details.php',
     '/updateCart' => 'updateCart.php',
     '/payCart' => 'payCart.php',
+    '/inventory' => 'inventory.php'
 ];
 
 const DB_PARAMS = [

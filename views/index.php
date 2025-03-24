@@ -80,7 +80,7 @@
                                 <li class="text-muted text-right"><?= $item->prixUnitaire ?> $</li>
                             </ul>
                             <div class="d-flex justify-content-between">
-                                <a href="/details" class="h2 text-decoration-none text-dark"><?= $item->nomItem ?></a>
+                                <a href="/details?idItem=<?=$item->idItem?>" class="h2 text-decoration-none text-dark"><?= $item->nomItem ?></a>
                                 <span class="text-light pt-2"><?= $item->poids ?> lbs</span>
                             </div>
                             <p class="card-text">

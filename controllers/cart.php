@@ -7,7 +7,7 @@ require_once 'src/class/player.php';
 
 sessionStart();
 if (!isset($_SESSION['idJoueur'])) {
-    $_SESSION['idJoueur'] = 1; // sera un redirect à l'index
+    redirect('/');
 }
 $idJoueur = $_SESSION['idJoueur'];
 

@@ -12,6 +12,7 @@
             }
         }
     }
+    sessionStart();
 ?>
 
 <body>
@@ -36,13 +37,18 @@
                             <i class="fa fa-fw fa-user text-dark fs-4"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end">
-                            <li><a class="dropdown-item" href="#">Inventaire</a></li>
-                            <li><a class="dropdown-item" href="#">Enigma</a></li>
-                            <li><a class="dropdown-item" href="#">Paramètre du compte</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Déconnexion</a></li>
+                            <?php if(isset($_SESSION['idJoueur'])): ?>
+                                <li><a class="dropdown-item" href="/inventory">Inventaire</a></li>
+                                <li><a class="dropdown-item" href="#">Enigma</a></li>
+                                <li><a class="dropdown-item" href="#">Paramètre du compte</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Déconnexion</a></li>
+                            <?php else: ?>
+                                <li><a class="dropdown-item" href="/connection">Connexion</a></li>
+                                <li><a class="dropdown-item" href="/createAccount">S'inscrire</a></li>
+                            <?php endif ?>
                         </ul>
                     </div>
                 </div>
