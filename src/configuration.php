@@ -3,10 +3,10 @@
 const ROUTES = [
 
     '/' => 'index.php',
-    '/erreur' => 'error.php',
-    '/connexion' => 'connection.php',
+    '/error' => 'error.php',
+    '/connection' => 'connection.php',
     '/createAccount' => 'createAccount.php',
-    '/deconnexion' => 'deconnection.php',
+    '/deconnection' => 'deconnection.php',
     '/cart' => 'cart.php',
     '/details' => 'details.php',
     '/updateCart' => 'updateCart.php',
