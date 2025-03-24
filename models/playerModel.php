@@ -186,4 +186,18 @@ class PlayerModel {
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
+    function connectPlayer(string $alias, string $password): bool {
+        try {
+            $stm = $this->pdo->prepare("call PlayerConnected(?, ?, ?);");
+            $stm->bindParam(1, $alias);
+            $stm->bindParam(2, $password);
+            $stm->bindParam(3, $bool, PDO::PARAM_INT);
+            $stm->execute();
+            $bool = $stm->fetch(PDO::FETCH_ASSOC);
+
+            return $bool == 1;
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
 }

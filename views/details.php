@@ -63,7 +63,9 @@ if ($item) {
                                 <?php endif; ?>
                             <?php endif; ?>
 
-                            <form method="POST">
+                            <form method="GET" action="/updateCart">
+                                <input type="hidden" name="idItem"
+                                    value="<?php echo htmlspecialchars($item['idItem']); ?>">
                                 <input type="hidden" name="product-title"
                                     value="<?php echo htmlspecialchars($item['nomItem']); ?>">
                                 <input type="hidden" id="quantiteStock"
@@ -73,20 +75,14 @@ if ($item) {
                                         <ul class="list-inline pb-3">
                                             <li class="list-inline-item text-right">
                                                 Quantity
-                                                <input type="hidden" name="item-quantity" id="item-quantity" value="1">
+                                                <input class="form-control" type="number" name="val" style="width: 80px;" id="item-quantity" value="1">
                                             </li>
-                                            <li class="list-inline-item"><span class="btn btn-success btn-sm fw-bold"
-                                                    id="btn-minus">-</span></li>
-                                            <li class="list-inline-item"><span class="badge bg-secondary"
-                                                    id="var-value">1</span></li>
-                                            <li class="list-inline-item"><span class="btn btn-success btn-sm fw-bold"
-                                                    id="btn-plus">+</span></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="row pb-3">
                                     <div class="col d-grid">
-                                        <button type="submit" href="/cart" class="btn btn-success btn-lg" name="submit"
+                                        <button type="submit" class="btn btn-success btn-lg" name="submit"
                                             value="addtocard">Ajouter au panier</button>
                                     </div>
                                 </div>
