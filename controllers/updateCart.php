@@ -19,3 +19,4 @@ if (isset($_GET['val']) && isset($_GET['idItem'])){
     $itemModel = new itemModel($pdo);
     $itemModel->updateItemInPanier($idJoueur, $idItem, $value);
 }
+redirect('/cart');

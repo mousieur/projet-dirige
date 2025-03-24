@@ -15,11 +15,13 @@ $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 
 $playerModel = new PlayerModel($pdo);
-$items = $playerModel->getPanierById($idJoueur);
 
 $playerModel = new playerModel($pdo);
 $player = $playerModel->selectById($idJoueur);
 $panier = $playerModel->getPanierById($idJoueur);
+if($panier == null){
+    $panier = [];
+}
 $total = 0;
 
 foreach ($panier as $item) {
@@ -46,14 +48,14 @@ else{
 $total = 0;
 $poids = 0;
 $count = 0;
-foreach ($items as $item) {
+foreach ($panier as $item) {
     $total += $item['prixUnitaire'] * $item['quantite'];
     $count += $item['quantite'];
     $poids += $item['poids'] * $item['quantite'];
 }
 view('cart', 
 [
-    'items' => $items,
+    'items' => $panier,
     'total' => $total,
     'poids' => $poids,
     'count' => $count,
