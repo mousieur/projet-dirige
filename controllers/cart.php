@@ -16,7 +16,7 @@ $pdo = $db->getPDO();
 
 
 $playerModel = new playerModel($pdo);
-$player = $playerModel->selectById($idJoueur);
+$player = $playerModel->getPlayerById($idJoueur);
 $panier = $playerModel->getPanierById($idJoueur);
 if($panier == null){
     $panier = [];

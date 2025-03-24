@@ -1,8 +1,9 @@
 <?php
+    sessionStart();
     $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
     $pdo = $db->getPDO();
     $playerModel = new playerModel($pdo);
-
+    $alias = "";
     $itemCount = 0;
     if(isset($_SESSION['idJoueur'])){
         $itemsForCount = $playerModel->getPanierById($_SESSION['idJoueur']);
@@ -11,6 +12,9 @@
                 $itemCount += $iteme['quantite'];
             }
         }
+
+        $player = $playerModel->getPlayerById($_SESSION['idJoueur']);
+        $alias = $player->alias;
     }
 ?>
 
@@ -31,6 +35,9 @@
                         <i class="fa fa-fw fa-cart-arrow-down text-dark"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark"><?=$itemCount?></span>
                     </a>
+                    <div>
+                        <?=$alias?>
+                    </div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-fw fa-user text-dark fs-4"></i>
@@ -42,9 +49,12 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Déconnexion</a></li>
+                            <?php if(!empty($alias)){?>
+                            <li><a class="dropdown-item" href="./deconnection">Déconnexion</a></li>
+                            <?php } else {?>
                             <li><a class="dropdown-item" href="./connection">connexion</a></li>
                             <li><a class="dropdown-item" href="./createAccount">Création de compte</a></li>
+                            <?php }?>
                         </ul>
                     </div>
                 </div>

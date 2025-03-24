@@ -33,6 +33,7 @@ if(isPost()) {
         if($playerModel->connectPlayer($connection['username'], $connection['password'])) {
             
             $player = $playerModel->getPlayerByAlias($connection['username']);
+            sessionStart();
             $_SESSION['idJoueur'] = $player->idJoueur;
             redirect('/');
         } else {
