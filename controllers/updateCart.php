@@ -1,6 +1,7 @@
 <?php
 require_once 'models/itemModel.php';
 require_once 'src/class/item.php';
+sessionStart();
 if(!isset($_SESSION['idJoueur'])){
     redirect('/');
 }

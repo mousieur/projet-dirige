@@ -1,5 +1,8 @@
 <?php
-
+sessionStart();
+if(isset($_SESSION['idJoueur'])){
+    redirect('/');
+}
 
 $accountCreated = isset($_GET['compteCree']) ? $_GET['compteCree'] : null;
 

@@ -16,6 +16,7 @@
         $player = $playerModel->getPlayerById($_SESSION['idJoueur']);
         $alias = $player->alias;
     }
+    var_dump($_SESSION['idJoueur']);
     sessionStart();
 ?>
 
@@ -34,9 +35,9 @@
                 <div class="d-flex align-items-center">
                     <a class="nav-icon position-relative text-decoration-none fs-3 px-3" href="/cart">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark"><?=$itemCount?></span>
+                        <span class="position-absolute top-0 start-80 translate-middle badge rounded-pill bg-light text-dark"><?=$itemCount?></span>
                     </a>
-                    <div>
+                    <div class="fs-3">
                         <?=$alias?>
                     </div>
                     <div class="btn-group">
@@ -51,17 +52,11 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-<<<<<<< HEAD
-                            <li><a class="dropdown-item" href="#">Déconnexion</a></li>
-                            <li><a class="dropdown-item" href="./connection">connexion</a></li>
-                            <li><a class="dropdown-item" href="./create">Création de compte</a></li>
-=======
                             <li><a class="dropdown-item" href="./deconnection">Déconnexion</a></li>
                             <?php } else {?>
                             <li><a class="dropdown-item" href="./connection">Connexion</a></li>
                             <li><a class="dropdown-item" href="./createAccount">Création de compte</a></li>
                             <?php }?>
->>>>>>> 829678a328e1cf55bc26dceccd6bbd04a2e2c493
                         </ul>
                     </div>
                 </div>
