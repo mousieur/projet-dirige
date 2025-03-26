@@ -56,7 +56,7 @@ class PlayerModel {
         }
     }
 
-    public function selectById(int $idJoueur): Player|null {
+    public function getPlayerById(int $idJoueur): Player|null {
         try {
             $stm = $this->pdo->prepare("SELECT * FROM Joueurs WHERE idJoueur = :idJoueur;");
             $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);

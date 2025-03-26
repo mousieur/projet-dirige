@@ -7,7 +7,7 @@ require_once 'src/class/player.php';
 
 sessionStart();
 if (!isset($_SESSION['idJoueur'])) {
-    $_SESSION['idJoueur'] = 1; // sera un redirect à l'index
+    redirect('/');
 }
 $idJoueur = $_SESSION['idJoueur'];
 
@@ -16,7 +16,7 @@ $pdo = $db->getPDO();
 
 
 $playerModel = new playerModel($pdo);
-$player = $playerModel->selectById($idJoueur);
+$player = $playerModel->getPlayerById($idJoueur);
 $panier = $playerModel->getPanierById($idJoueur);
 if($panier == null){
     $panier = [];
