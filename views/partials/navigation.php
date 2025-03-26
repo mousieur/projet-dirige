@@ -16,7 +16,6 @@
         $player = $playerModel->getPlayerById($_SESSION['idJoueur']);
         $alias = $player->alias;
     }
-    var_dump($_SESSION['idJoueur']);
     sessionStart();
 ?>
 
@@ -55,7 +54,7 @@
                             <li><a class="dropdown-item" href="./deconnection">Déconnexion</a></li>
                             <?php } else {?>
                             <li><a class="dropdown-item" href="./connection">Connexion</a></li>
-                            <li><a class="dropdown-item" href="./createAccount">Création de compte</a></li>
+                            <li><a class="dropdown-item" href="./create">Création de compte</a></li>
                             <?php }?>
                         </ul>
                     </div>
