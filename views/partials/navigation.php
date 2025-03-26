@@ -44,7 +44,7 @@
                             </li>
                             <li><a class="dropdown-item" href="#">Déconnexion</a></li>
                             <li><a class="dropdown-item" href="./connection">connexion</a></li>
-                            <li><a class="dropdown-item" href="./createAccount">Création de compte</a></li>
+                            <li><a class="dropdown-item" href="./create">Création de compte</a></li>
                         </ul>
                     </div>
                 </div>

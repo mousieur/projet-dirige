@@ -9,7 +9,6 @@ const ROUTES = [
     '/deconnexion' => 'deconnection.php',
     '/error' => 'error.php',
     '/connection' => 'connection.php',
-    '/createAccount' => 'createAccount.php',
     '/deconnection' => 'deconnection.php',
     '/cart' => 'cart.php',
     '/details' => 'details.php',
