@@ -10,8 +10,13 @@ if (!isset($_SESSION['idJoueur'])) {
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 
+
 $playerModel = new playerModel($pdo);
 $items = $playerModel->getInventaireById($_SESSION['idJoueur']);
+if($items == null){
+    $items = [];
+}
+
 
 view('inventory',
 [

@@ -45,7 +45,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end">
                             <?php if(!empty($alias)){?>
-                            <li><a class="dropdown-item" href="#">Inventaire</a></li>
+                            <li><a class="dropdown-item" href="/inventory">Inventaire</a></li>
                             <li><a class="dropdown-item" href="#">Enigma</a></li>
                             <li><a class="dropdown-item" href="#">Paramètre du compte</a></li>
                             <li>

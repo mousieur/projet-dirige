@@ -38,5 +38,5 @@ if ($item_id > 0) {
     $item = null;
     $comments = [];
 }
-
+// 
 require 'views/details.php';

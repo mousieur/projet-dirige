@@ -3,11 +3,10 @@ require 'partials/head.php';
 require 'partials/navigation.php';
 
 if ($item) {
-    // Calcul de la moyenne des étoiles
     $totalStars = 0;
     $nbComments = count($comments);
     foreach ($comments as $comment) {
-        $totalStars += $comment->getEtoiles(); // Utiliser la méthode getter
+        $totalStars += $comment->getEtoiles();
     }
     $averageStars = $nbComments > 0 ? floor($totalStars / $nbComments) : 0;
     ?>

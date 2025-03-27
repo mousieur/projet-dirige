@@ -18,6 +18,11 @@ if (isset($_GET['val']) && isset($_GET['idItem'])){
     $pdo = $db->getPDO();
 
     $itemModel = new itemModel($pdo);
+
+    $item = $itemModel->selectById($idItem);
+    if($item->quantiteStock < $value){
+        redirect(('/'));
+    }
     $itemModel->updateItemInPanier($idJoueur, $idItem, $value);
 }
 redirect('/cart');
