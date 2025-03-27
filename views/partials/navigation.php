@@ -40,7 +40,7 @@
                         <?=$alias?>
                     </div>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu">
                             <i class="fa fa-fw fa-user text-dark fs-4"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end">

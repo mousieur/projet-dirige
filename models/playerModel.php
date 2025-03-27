@@ -169,6 +169,7 @@ class PlayerModel {
             $stm->bindParam(1, $idJoueur);
             $stm->execute();
         } catch (PDOException $e) {
+            redirect('/cart');
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }

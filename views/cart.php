@@ -15,7 +15,9 @@
             <div class="list-group" id="product-list">
                 <?php foreach($items as $item): ?>
                     <div class="list-group-item d-flex align-items-center justify-content-between shadow p-3 mb-3">
-                        <img src="public/img/<?=$item["photo"]?>" class="rounded" alt="Product" style="height: 200px;">
+                        <a href="/details?idItem=<?= $item['idItem']?>">
+                            <img src="public/img/<?=$item["photo"]?>" class="rounded" alt="Product" style="height: 200px;">
+                        </a>
                         <h5 class="mb-0 flex-grow-1 ms-3"><?=$item['nomItem']?></h5>
                         <p class="mb-0">$<span class="product-price"><?=$item['prixUnitaire']?></span></p>
                         <input type="number" class="form-control" value="<?=$item['quantite']?>" style="width: 80px;" onchange="callPHPFunction(this.value, <?= $item['idItem'] ?>)">
@@ -30,7 +32,7 @@
             <div class="card p-3 shadow">
                 <h4>Total (<?=$count?>): <?=$total?>$</h4>
                 <h4>Poids : <?=$poids?>lbs</h4>
-                <a class="btn btn-success w-100 mt-3" href="/payCart">Payer</a><br>
+                <button class="btn btn-success w-100 mt-3" href="/payCart" <?= ($_SESSION['messageCaps'] != "") ? 'disabled' : '' ?>>Payer</button><br>
                 <div>
                     <p class="text-danger"><?= $_SESSION['messageCaps'] ?></p>
                     <p class="text-danger"><?= $_SESSION['messagePoids'] ?></p>
@@ -39,3 +41,6 @@
         </div>
     </div>
 </div>
+<?php
+require 'partials/footer.php';
+?>
