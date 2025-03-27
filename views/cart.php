@@ -36,6 +36,7 @@
                 <div>
                     <p class="text-danger"><?= $_SESSION['messageCaps'] ?></p>
                     <p class="text-danger"><?= $_SESSION['messagePoids'] ?></p>
+                    <p class="text-danger"><?= $_SESSION['messageQuantity'] ?></p>
                 </div>
             </div>
         </div>

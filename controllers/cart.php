@@ -7,7 +7,7 @@ require_once 'src/class/player.php';
 
 sessionStart();
 if (!isset($_SESSION['idJoueur'])) {
-    redirect('/');
+    redirect('/connection');
 }
 $idJoueur = $_SESSION['idJoueur'];
 

@@ -2,8 +2,9 @@
 require_once 'models/itemModel.php';
 require_once 'src/class/item.php';
 sessionStart();
+$_SESSION['messageQuantity'] = "";
 if(!isset($_SESSION['idJoueur'])){
-    redirect('/');
+    redirect('/connection');
 }
 if (isset($_GET['val']) && isset($_GET['idItem'])){
     $value = $_GET['val'];
@@ -21,8 +22,11 @@ if (isset($_GET['val']) && isset($_GET['idItem'])){
 
     $item = $itemModel->selectById($idItem);
     if($item->quantiteStock < $value){
-        redirect(('/'));
+        $itemModel->updateItemInPanier($idJoueur, $idItem, $item->quantiteStock);
+        $_SESSION['messageQuantity'] = "*Il n'a pas assez d'items disponibles, la totalité des items disponibles ont été ajoutés à votre panier";
     }
-    $itemModel->updateItemInPanier($idJoueur, $idItem, $value);
+    else{
+        $itemModel->updateItemInPanier($idJoueur, $idItem, $value);
+    }
 }
 redirect('/cart');

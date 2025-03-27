@@ -30,3 +30,6 @@ require 'partials/navigation.php';
         <?php endforeach; ?>
     </div>
 </div>
+<?php
+require 'partials/footer.php';
+?>
