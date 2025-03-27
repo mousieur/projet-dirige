@@ -10,9 +10,9 @@ class PlayerModel {
             $stmt->bindValue(':nom', $nom, PDO::PARAM_STR);
             $stmt->bindValue(':prenom', $prenom, PDO::PARAM_STR);
             $stmt->bindValue(':caps', 0, PDO::PARAM_INT); 
-            $stmt->bindValue(':dexterite', 0, PDO::PARAM_INT); 
+            $stmt->bindValue(':dexterite', 100, PDO::PARAM_INT); 
             $stmt->bindValue(':pointsDeVie', 100, PDO::PARAM_INT); 
-            $stmt->bindValue(':poidsMax', 50.0, PDO::PARAM_STR); 
+            $stmt->bindValue(':poidsMax', 100.0, PDO::PARAM_STR); 
             $stmt->bindValue(':photo', 'default.jpg', PDO::PARAM_STR); 
             $stmt->bindValue(':couleur', 'none', PDO::PARAM_STR); 
             $stmt->bindValue(':email', $email, PDO::PARAM_STR);
@@ -87,7 +87,7 @@ class PlayerModel {
 
     public function selectByEmail(string $email): Player|null {
         try {
-            $stm = $this->pdo->prepare("SELECT idJoueur, alias, nom, prenom, caps, dexterite, pointsDeVie, poidsMax, photo, couleur, email, password FROM user WHERE email = :email;");
+            $stm = $this->pdo->prepare("SELECT idJoueur, alias, nom, prenom, caps, dexterite, pointsDeVie, poidsMax, photo, couleur, email, pasword FROM Joueurs WHERE email = :email;");
             $stm->bindValue(":email", $email, PDO::PARAM_STR);
             $stm->execute();
             $data = $stm->fetch(PDO::FETCH_ASSOC);
@@ -105,12 +105,12 @@ class PlayerModel {
                     $data['photo'],
                     $data['couleur'],
                     $data['email'],
-                    $data['password']
+                    $data['pasword']
                 );
             }
             return null;
         } catch (PDOException $e) {
-            throw new PDOException($e->getMessage(), $e->getCode());
+            throw new PDOException($e->getMessage(), (int)$e->getCode());
         }
     }
     public function getInventaireById(int $idJoueur): array|null {

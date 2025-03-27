@@ -28,11 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($playerModel->getPlayerByAlias($alias)){
         $errors['alias'] = "un compte avec cet alias existe déjà";
     }
-    if($playerModel->selectByEmail($email)){
-        $errors['email'] = "un compte avec ce email existe déjà";
+
+    if ($playerModel->selectByEmail($email)) {
+        $errors['email'] = "Un compte avec cet email existe déjà.";
     }
     if(empty($errors)){
-        $playerModel->createUser($alias, $nom, $prenom, $email, @$password);
+        $playerModel->createUser($alias, $nom, $prenom, $email, $password);
         redirect('/connection?compteCree=true');
     }
 }
