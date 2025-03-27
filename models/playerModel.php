@@ -10,9 +10,9 @@ class PlayerModel {
             $stmt->bindValue(':nom', $nom, PDO::PARAM_STR);
             $stmt->bindValue(':prenom', $prenom, PDO::PARAM_STR);
             $stmt->bindValue(':caps', 0, PDO::PARAM_INT); 
-            $stmt->bindValue(':dexterite', 0, PDO::PARAM_INT); 
+            $stmt->bindValue(':dexterite', 100, PDO::PARAM_INT); 
             $stmt->bindValue(':pointsDeVie', 100, PDO::PARAM_INT); 
-            $stmt->bindValue(':poidsMax', 50.0, PDO::PARAM_STR); 
+            $stmt->bindValue(':poidsMax', 100.0, PDO::PARAM_STR); 
             $stmt->bindValue(':photo', 'default.jpg', PDO::PARAM_STR); 
             $stmt->bindValue(':couleur', 'none', PDO::PARAM_STR); 
             $stmt->bindValue(':email', $email, PDO::PARAM_STR);
