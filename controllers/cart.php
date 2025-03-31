@@ -9,6 +9,9 @@ sessionStart();
 if (!isset($_SESSION['idJoueur'])) {
     redirect('/connection');
 }
+if(!isset( $_SESSION['messageQuantity'])){
+    $_SESSION['messageQuantity'] = "";
+}
 $idJoueur = $_SESSION['idJoueur'];
 
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
