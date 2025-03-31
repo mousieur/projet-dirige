@@ -3,9 +3,10 @@
     $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
     $pdo = $db->getPDO();
     $playerModel = new playerModel($pdo);
-    $alias = "";
     $itemCount = 0;
+    $connected = false;
     if(isset($_SESSION['idJoueur'])){
+        $connected = true;
         $itemsForCount = $playerModel->getPanierById($_SESSION['idJoueur']);
         if($itemsForCount !== null){
             foreach ($itemsForCount as $iteme) {
@@ -38,9 +39,14 @@
                         <i class="fa fa-fw fa-cart-arrow-down text-dark"></i>
                         <span class="position-absolute top-0 start-80 translate-middle badge rounded-pill bg-light text-dark"><?=$itemCount?></span>
                     </a>
+                    <?php
+                    if($connected):
+                    ?>
                     <div class="fs-3">
                         <?=$alias?> | <?=$caps?>$
                     </div>
+                    <?php
+                    endif?>
                     <div class="btn-group">
                         <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu">
                             <i class="fa fa-fw fa-user text-dark fs-4"></i>
