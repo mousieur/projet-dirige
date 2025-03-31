@@ -37,6 +37,10 @@ require 'partials/navigation.php';
                     <div class="fs-5 fw-bold">Dextérité:</div>
                     <span class="fs-5"><?= $player->dexterite ?></span>
                 </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="fs-5 fw-bold">Poids:</div>
+                    <span class="fs-5"><?=$poidsInventaire?> / <?=$player->poidsMax ?>lbs</span>
+                </div>
             </div>
         </div>
     </div>

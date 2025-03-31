@@ -15,6 +15,8 @@
 
         $player = $playerModel->getPlayerById($_SESSION['idJoueur']);
         $alias = $player->alias;
+        $caps = $player->caps;
+        
     }
     sessionStart();
 ?>
@@ -37,7 +39,7 @@
                         <span class="position-absolute top-0 start-80 translate-middle badge rounded-pill bg-light text-dark"><?=$itemCount?></span>
                     </a>
                     <div class="fs-3">
-                        <?=$alias?>
+                        <?=$alias?> | <?=$caps?>$
                     </div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu">

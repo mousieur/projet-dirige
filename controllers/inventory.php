@@ -20,6 +20,6 @@ if($items == null){
 
 view('inventory',
 [
-    'items' => $items    
+    'items' => $items
 ]);
 
