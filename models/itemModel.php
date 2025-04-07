@@ -139,7 +139,7 @@ class ItemModel {
                     foreach ($data as $row) {
                         $items[] = new Item(
                             $row['idItem'],
-                            $row['nomItem'],
+                            $row['nomItem'],                                                    
                             $row['quantiteStock'],
                             $row['itemType'],
                             $row['prixUnitaire'],
