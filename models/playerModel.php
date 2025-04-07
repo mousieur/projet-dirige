@@ -128,7 +128,8 @@ class PlayerModel {
                         'prixDeVente' => $row['prixDeVente'],
                         'nomItem' => $row['nomItem'],
                         'photo' => $row['photo'],
-                        'poids' => $row['poids']
+                        'poids' => $row['poids'],
+                        'type' => $row['typeItem'],
                     ];
                 }
                 return $output;
@@ -239,6 +240,28 @@ class PlayerModel {
             return null;
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+    function sellItem(int $idJoueur, int $idItem, int $quantite): void {
+        try {
+            $stm = $this->pdo->prepare("call SellItem(?, ?, ?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->bindParam(2, $idItem);
+            $stm->bindParam(3, $quantite);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+    function consumeItem(int $idJoueur, int $idItem, int $quantite): void {
+        try {
+            $stm = $this->pdo->prepare("call ConsumeItem(?, ?, ?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->bindParam(2, $idItem);
+            $stm->bindParam(3, $quantite);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
         }
     }
 }

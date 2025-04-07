@@ -27,6 +27,15 @@ require 'partials/navigation.php';
                         <ul class="list-unstyled d-flex justify-content-between">
                             <li class="text-muted text-right">Prix de vente : <?= number_format($item['prixDeVente'], 2) ?>$</li>
                         </ul>
+                        <form action="/removeFromInventory" method="get">
+                            <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
+                            <input type="number" name="quantite" class="form-control mb-2" min="1" max="<?= $item['quantite'] ?>" value="1">
+                            <input type="hidden" name="idJoueur" value="<?= $_SESSION['idJoueur'] ?>">
+                            <?php if($item['type'] == "nourriture" || $item['type'] == "medicament"): ?>
+                                <button class="btn btn-success w-100 mb-2" name="mode" value="consume">Manger</button>
+                            <?php endif; ?>
+                            <button class="btn btn-danger w-100" name="mode" value="sell">Vendre</button>
+                        </form>
                     </div>
                 </div>
             </div>
