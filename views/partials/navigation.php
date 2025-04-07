@@ -17,6 +17,7 @@
         $player = $playerModel->getPlayerById($_SESSION['idJoueur']);
         $alias = $player->alias;
         $caps = $player->caps;
+        $isAdmin = $player->isAdmin;
     }
     sessionStart();
 ?>

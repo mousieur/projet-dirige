@@ -53,10 +53,12 @@ if ($item) {
                                     <p>Material Composition: <?php echo htmlspecialchars($itemDetails['composite']); ?></p>
                                     <p>Size: <?php echo htmlspecialchars($itemDetails['taille']); ?></p>
                                 <?php elseif ($item['itemType'] == 'Nourriture'): ?>
+                                    <p>Health: <?php echo htmlspecialchars($itemDetails['ptsVie']); ?> </p>
                                     <p>Caloric intake: <?php echo htmlspecialchars($itemDetails['apportCalorique']); ?></p>
                                     <p>Nutritional value: <?php echo htmlspecialchars($itemDetails['composantNutritif']); ?></p>
                                 <?php elseif ($item['itemType'] == 'Medicament'): ?>
                                     <p>Effect: <?php echo htmlspecialchars($itemDetails['attendu']); ?></p>
+                                    <p>Health: <?php echo htmlspecialchars($itemDetails['ptsVie']); ?> </p>
                                     <p>Duration: <?php echo htmlspecialchars($itemDetails['duree']); ?></p>
                                     <p>Undesirable: <?php echo htmlspecialchars($itemDetails['indesirable']); ?></p>
                                 <?php endif; ?>
