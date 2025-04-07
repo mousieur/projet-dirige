@@ -129,7 +129,7 @@ class PlayerModel {
                         'nomItem' => $row['nomItem'],
                         'photo' => $row['photo'],
                         'poids' => $row['poids'],
-                        'type' => $row['typeItem'],
+                        'type' => $row['itemType'],
                     ];
                 }
                 return $output;
