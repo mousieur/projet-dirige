@@ -45,7 +45,8 @@ class PlayerModel {
                         $row['photo'],
                         $row['couleur'],
                         $row['email'],
-                        $row['password']
+                        $row['password'],
+                        $row['estAdmin']
                     );
                 }
                 return $players;
@@ -76,7 +77,8 @@ class PlayerModel {
                     $data['photo'],
                     $data['couleur'],
                     $data['email'],
-                    $data['pasword']
+                    $data['pasword'],
+                    $data['estAdmin']
                 );
             }
             return null;
@@ -105,7 +107,8 @@ class PlayerModel {
                     $data['photo'],
                     $data['couleur'],
                     $data['email'],
-                    $data['pasword']
+                    $data['pasword'],
+                    $data['estAdmin']
                 );
             }
             return null;
@@ -129,7 +132,7 @@ class PlayerModel {
                         'nomItem' => $row['nomItem'],
                         'photo' => $row['photo'],
                         'poids' => $row['poids'],
-                        'type' => $row['typeItem'],
+                        'type' => $row['itemType'],
                     ];
                 }
                 return $output;
@@ -233,7 +236,8 @@ class PlayerModel {
                     $data['photo'],
                     $data['couleur'],
                     $data['email'],
-                    $data['pasword']
+                    $data['pasword'],
+                    $data['estAdmin']
                 );
             }
 

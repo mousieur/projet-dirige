@@ -15,11 +15,37 @@ $playerModel = new playerModel($pdo);
 if(!isset($_GET['idItem']) || !isset($_GET['quantite']) || !isset($_GET['idJoueur'])){
     redirect('/');
 }
+$inventory = $playerModel->getInventaireById($_GET['idJoueur']);
+if($inventory == null){
+    $inventory = [];
+}
 
 if($_GET['mode'] == "sell"){
-    $playerModel->sellItem($_GET['idJoueur'], $_GET['idItem'], $_GET['quantite']);
+    foreach ($inventory as $item) {
+        if($item['idItem'] == $_GET['idItem']){
+            if($item['quantite'] > $_GET['quantite']){
+                $playerModel->sellItem($_GET['idJoueur'], $_GET['idItem'], $_GET['quantite']);
+            }
+            else{
+                $playerModel->sellItem($_GET['idJoueur'], $_GET['idItem'], $item['quantite']);
+            }
+        }
+    }
 }
+
 if($_GET['mode'] == "consume"){
-    $playerModel->consumeItem($_GET['idJoueur'], $_GET['idItem'], $_GET['quantite']);
+    foreach ($inventory as $item) {
+        if($item['idItem'] == $_GET['idItem']){
+            if($item['quantite'] > 1){
+                if($item['quantite'] > $_GET['quantite']){
+                    $playerModel->consumeItem($_GET['idJoueur'], $_GET['idItem'], $_GET['quantite']);
+                }
+                else{
+                    $playerModel->consumeItem($_GET['idJoueur'], $_GET['idItem'], $item['quantite'] - 1);
+                }
+            }
+        }
+    }
+
 }
 redirect('/inventory');

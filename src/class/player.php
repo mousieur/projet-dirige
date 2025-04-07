@@ -15,5 +15,6 @@ class Player
         public string $couleur,
         public string $email,
         public string $password,
+        public bool $isAdmin,
     ) {}
 }
