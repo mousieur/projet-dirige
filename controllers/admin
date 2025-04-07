@@ -1,0 +1,10 @@
+<?php
+
+function afficherDemandesCaps() {
+    $demandes = [
+        ['id' => 1, 'joueur' => 'LinkMaster', 'montant' => 300, 'date' => '2025-04-07'],
+        ['id' => 2, 'joueur' => 'ZeldaQueen', 'montant' => 150, 'date' => '2025-04-06'],
+    ];
+
+    require 'views/adminDemandesCaps.php';
+}
