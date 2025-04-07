@@ -272,15 +272,23 @@ class PlayerModel {
             throw new PDOException($e->getMessage(), 1);
         }
     }
+<<<<<<< HEAD
     function requestCaps(int $idJoueur){
         try {
             $stm = $this->pdo->prepare("call AddRequest(?);");
+=======
+
+    function AcceptRequest(int $idJoueur): void {
+        try {
+            $stm = $this->pdo->prepare("call AcceptRequest(?);");
+>>>>>>> b54fb01b499d384eb2065b60dc9a8bea331d1cf9
             $stm->bindParam(1, $idJoueur);
             $stm->execute();
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), 1);
         }
     }
+<<<<<<< HEAD
     function getAllRequest(): array|null {
         try {
             $stm = $this->pdo->prepare("call GetAllRequest();");
@@ -297,8 +305,19 @@ class PlayerModel {
                 return $output;
             }
             return null;
+=======
+    function RefuseRequest(int $idJoueur): void {
+        try {
+            $stm = $this->pdo->prepare("call RefuseRequest(?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+>>>>>>> b54fb01b499d384eb2065b60dc9a8bea331d1cf9
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), 1);
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b54fb01b499d384eb2065b60dc9a8bea331d1cf9
 }

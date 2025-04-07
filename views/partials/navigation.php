@@ -56,6 +56,9 @@
                             <li><a class="dropdown-item" href="/inventory">Inventaire</a></li>
                             <li><a class="dropdown-item" href="#">Enigma</a></li>
                             <li><a class="dropdown-item" href="/playerDetails">Paramètre du compte</a></li>
+                            <?php if($isAdmin){?>
+                                <li><a class="dropdown-item" href="/adminDemandesCaps">Demandes de Caps</a></li>
+                            <?php }?>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
