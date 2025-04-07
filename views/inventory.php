@@ -21,8 +21,11 @@ require 'partials/navigation.php';
                                 class="h2 text-decoration-none text-dark"><?= $item['nomItem'] ?></a>
                             <span class="text-light pt-2"><?= $item['poids'] ?> lbs</span>
                         </div>
+                        <div class="text-muted">
+                            Quantité : <?=$item['quantite']?>
+                        </div>
                         <ul class="list-unstyled d-flex justify-content-between">
-                            <li class="text-muted text-right">Prix de vente :<?= number_format($item['prixDeVente'], 2) ?>$</li>
+                            <li class="text-muted text-right">Prix de vente : <?= number_format($item['prixDeVente'], 2) ?>$</li>
                         </ul>
                     </div>
                 </div>
@@ -30,3 +33,6 @@ require 'partials/navigation.php';
         <?php endforeach; ?>
     </div>
 </div>
+<?php
+require 'partials/footer.php';
+?>

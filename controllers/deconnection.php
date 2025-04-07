@@ -1,4 +1,6 @@
 <?php
 sessionStart();
-unset($_SESSION['idJoueur']);
+if(isset($_SESSION['idJoueur'])){
+    unset($_SESSION['idJoueur']);
+}
 redirect('/');

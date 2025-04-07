@@ -32,10 +32,13 @@
             <div class="card p-3 shadow">
                 <h4>Total (<?=$count?>): <?=$total?>$</h4>
                 <h4>Poids : <?=$poids?>lbs</h4>
-                <button class="btn btn-success w-100 mt-3" href="/payCart" <?= ($_SESSION['messageCaps'] != "") ? 'disabled' : '' ?>>Payer</button><br>
+                <form action="/payCart">
+                    <button class="btn btn-success w-100 mt-3" type="submit" <?= ($_SESSION['messageCaps'] != "") ? 'disabled' : '' ?>>Payer</button><br>
+                </form>
                 <div>
                     <p class="text-danger"><?= $_SESSION['messageCaps'] ?></p>
                     <p class="text-danger"><?= $_SESSION['messagePoids'] ?></p>
+                    <p class="text-danger"><?= $_SESSION['messageQuantity'] ?></p>
                 </div>
             </div>
         </div>

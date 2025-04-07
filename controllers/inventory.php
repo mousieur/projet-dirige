@@ -4,7 +4,7 @@ require_once 'src/class/player.php';
 
 sessionStart();
 if (!isset($_SESSION['idJoueur'])) {
-    redirect('/');
+    redirect('/connection');
 }
 
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
@@ -20,6 +20,6 @@ if($items == null){
 
 view('inventory',
 [
-    'items' => $items    
+    'items' => $items
 ]);
 

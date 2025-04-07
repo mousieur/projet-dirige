@@ -85,11 +85,6 @@ if ($item) {
                                             value="addtocard">Ajouter au panier</button>
                                     </div>
                                 </div>
-                                <div class="row pb-3">
-                                    <div class="col">
-                                        <p id="error-message" class="text-danger" style="display: none;">La quantité demandée dépasse la quantité en stock.</p>
-                                    </div>
-                                </div>
                             </form>
 
                         </div>
