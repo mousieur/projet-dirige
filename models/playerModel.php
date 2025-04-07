@@ -264,4 +264,24 @@ class PlayerModel {
             throw new PDOException($e->getMessage(), 1);
         }
     }
+
+    function AcceptRequest(int $idJoueur): void {
+        try {
+            $stm = $this->pdo->prepare("call AcceptRequest(?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+    function RefuseRequest(int $idJoueur): void {
+        try {
+            $stm = $this->pdo->prepare("call RefuseRequest(?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+
 }
