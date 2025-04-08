@@ -1,24 +1,32 @@
 <?php
+require_once 'models/playerModel.php';
+
+session_start();
+if(!isset($_SESSION['idJoueur'])) {
+    redirect('/connection');
+}
 
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $playerModel = new PlayerModel($pdo);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['idDemande'])) {
-    $idDemande = (int) $_POST['idDemande'];
+if(isset($_POST['action'], $_POST['idJoueur'])) {
+    $idJoueur = (int)$_POST['idJoueur'];
     $action = $_POST['action'];
 
     try {
         if ($action === 'accepter') {
-            $playerModel->AcceptRequest($idDemande);
-            $message = "Demande acceptée avec succès.";
-            redirect('/adminDemandesCaps');
+            $playerModel->AcceptRequest($idJoueur);
+            $_SESSION['message'] = "Demande acceptée avec succès.";
         } elseif ($action === 'refuser') {
-            $playerModel->RefuseRequest($idDemande);
-            $message = "Demande refusée avec succès.";
-            redirect('/adminDemandesCaps');
+            $playerModel->RefuseRequest($idJoueur);
+            $_SESSION['message'] = "Demande refusée avec succès.";
+        } else {
+            $_SESSION['message'] = "Action non reconnue.";
         }
     } catch (PDOException $e) {
-        $message = "Erreur : " . $e->getMessage();
+        $_SESSION['message'] = "Erreur : " . $e->getMessage();
     }
 }
+
+redirect('/adminDemandesCaps');

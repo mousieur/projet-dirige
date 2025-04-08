@@ -18,7 +18,8 @@ const ROUTES = [
     '/playerDetails' => 'playerDetails.php',
     '/removeFromInventory' => 'removeFromInventory.php',
     '/adminDemandesCaps' => 'adminDemandesCaps.php',
-    '/requestCaps' => 'requestCaps.php',  
+    '/requestCaps' => 'requestCaps.php', 
+    '/processRequest' => 'processRequest.php',
 ];
 
 const DB_PARAMS = [

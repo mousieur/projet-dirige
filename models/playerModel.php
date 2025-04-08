@@ -47,7 +47,7 @@ class PlayerModel {
                         $row['email'],
                         $row['password'],
                         $row['estAdmin'],
-                        $row['requestCount']
+                        $row['requestCount'] ?? 0
                     );
                 }
                 return $players;
@@ -80,7 +80,7 @@ class PlayerModel {
                     $data['email'],
                     $data['pasword'],
                     $data['estAdmin'],
-                    $data['requestCount']
+                    $data['requestCount'] ?? 0
                 );
             }
             return null;
@@ -111,7 +111,7 @@ class PlayerModel {
                     $data['email'],
                     $data['pasword'],
                     $data['estAdmin'],
-                    $data['requestCount']
+                    $data['requestCount'] ?? 0
                 );
             }
             return null;
@@ -241,7 +241,7 @@ class PlayerModel {
                     $data['email'],
                     $data['pasword'],
                     $data['estAdmin'],
-                    $data['requestCount']
+                    $data['requestCount'] ?? 0
                 );
             }
 
@@ -284,7 +284,7 @@ class PlayerModel {
     }
     function RefuseRequest(int $idJoueur): void {
         try {
-            $stm = $this->pdo->prepare("call RefuseRequest(?);");
+            $stm = $this->pdo->prepare("call DenyRequest(?);");
             $stm->bindParam(1, $idJoueur);
             $stm->execute();
         } catch (PDOException $e) {

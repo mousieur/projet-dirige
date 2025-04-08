@@ -18,6 +18,29 @@ if(!$player || !$player->isAdmin){
     redirect('/index');
 }
 
+$demandes = $playerModel->getAllRequest();
+if($demandes == null){
+    $demandes = [];
+}else{
+    foreach($demandes as &$demande){
+        $playerDetails = $playerModel->getPlayerById((int)$demande['idJoueur']);
+        if($playerDetails){
+            $demande['alias'] = $playerDetails->alias;
+        }else{
+            $demade['alias'] = "Inconnu";   
+        }
+    }
+}
 
-require 'views/adminDemandesCaps.php';
+$totalDemandes = count($demandes);
+view('adminDemandesCaps', 
+[
+    'demandes' => $demandes,
+    'totalDemandes' => $totalDemandes,
+    'message' => $_SESSION['message'] ?? '',
+]);
+
+unset($_SESSION['message']);
+
+
 
