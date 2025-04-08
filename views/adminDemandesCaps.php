@@ -6,7 +6,6 @@ require_once 'views/partials/navigation.php';
 <main class="container mt-5">
     <h2>Demandes de caps en attente</h2>
 
-    <!-- Display success or error message -->
     <?php if (!empty($message)): ?>
         <div class="alert <?= strpos($message, 'Erreur') === false ? 'alert-success' : 'alert-danger' ?>" role="alert">
             <?= htmlspecialchars($message) ?>
@@ -29,7 +28,7 @@ require_once 'views/partials/navigation.php';
                     <td><?= htmlspecialchars($demande['caps']) ?> caps</td>
                     <td><?= htmlspecialchars($demande['date']) ?></td>
                     <td>
-                        <form method="post" action="/?action=traiterDemande">
+                        <form method="post" action="/processRequest">
                             <input type="hidden" name="idDemande" value="<?= $demande['id'] ?>">
                             <button type="submit" name="action" value="accepter"
                                 class="btn btn-success btn-sm">Accepter</button>
