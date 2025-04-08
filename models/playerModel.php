@@ -46,7 +46,8 @@ class PlayerModel {
                         $row['couleur'],
                         $row['email'],
                         $row['password'],
-                        $row['estAdmin']
+                        $row['estAdmin'],
+                        $row['requestCount']
                     );
                 }
                 return $players;
@@ -78,7 +79,8 @@ class PlayerModel {
                     $data['couleur'],
                     $data['email'],
                     $data['pasword'],
-                    $data['estAdmin']
+                    $data['estAdmin'],
+                    $data['requestCount']
                 );
             }
             return null;
@@ -108,7 +110,8 @@ class PlayerModel {
                     $data['couleur'],
                     $data['email'],
                     $data['pasword'],
-                    $data['estAdmin']
+                    $data['estAdmin'],
+                    $data['requestCount']
                 );
             }
             return null;
@@ -237,7 +240,8 @@ class PlayerModel {
                     $data['couleur'],
                     $data['email'],
                     $data['pasword'],
-                    $data['estAdmin']
+                    $data['estAdmin'],
+                    $data['requestCount']
                 );
             }
 
@@ -287,5 +291,26 @@ class PlayerModel {
             throw new PDOException($e->getMessage(), 1);
         }
     }
-
+    function getAllRequest(): array|null {
+        try {
+            $stm = $this->pdo->prepare("call GetAllRequest();");
+            $stm->execute();
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+            if (!empty($data)) {
+                return $data;
+            }
+            return null;
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+    function requestCaps(int $idJoueur): void {
+        try {
+            $stm = $this->pdo->prepare("call AddRequest(?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
 }
