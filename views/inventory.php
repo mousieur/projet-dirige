@@ -22,11 +22,28 @@ require 'partials/navigation.php';
                             <span class="text-light pt-2"><?= $item['poids'] ?> lbs</span>
                         </div>
                         <div class="text-muted">
-                            Quantité : <?=$item['quantite']?>
+                            Quantité : <?= $item['quantite'] ?>
                         </div>
-                        <ul class="list-unstyled d-flex justify-content-between">
-                            <li class="text-muted text-right">Prix de vente : <?= number_format($item['prixDeVente'], 2) ?>$</li>
-                        </ul>
+                        <form action="/removeFromInventory" method="get">
+                            <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
+                            <input type="hidden" name="idJoueur" value="<?= $_SESSION['idJoueur'] ?>">
+
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted">Prix de vente :
+                                    <?= number_format($item['prixDeVente'], 2) ?>$</span>
+                                <input type="number" name="quantite" class="form-control ms-3" style="width: 80px;" min="1"
+                                    max="<?= $item['quantite'] ?>" value="1">
+                            </div>
+
+                            <div class="d-flex">
+                                <?php if ($item['type'] == "Nourriture" || $item['type'] == "Medicament"): ?>
+                                    <button type="submit" class="btn btn-success w-100 mx-2" name="mode"
+                                        value="consume">Utiliser</button>
+                                <?php endif; ?>
+                                <button type="submit" class="btn btn-danger w-100 mx-2" name="mode"
+                                    value="sell">Vendre</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

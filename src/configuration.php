@@ -14,6 +14,10 @@ const ROUTES = [
     '/payCart' => 'payCart.php',
     '/inventory' => 'inventory.php',
     '/playerDetails' => 'playerDetails.php',
+    '/removeFromInventory' => 'removeFromInventory.php',
+    '/adminDemandesCaps' => 'adminDemandesCaps.php',
+    '/requestCaps' => 'requestCaps.php', 
+    '/processRequest' => 'processRequest.php',
     '/enigma' => 'enigma.php',
 ];
 

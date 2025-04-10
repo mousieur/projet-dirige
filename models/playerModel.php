@@ -5,7 +5,7 @@ class PlayerModel {
 
     public function createUser(string $alias, string $nom, string $prenom, string $email, string $password): void {
         try {
-            $stmt = $this->pdo->prepare('call CreatePlayer(:alias, :nom, :prenom, :caps, :dexterite, :pointsDeVie, :poidsMax, :photo, :couleur, :email, :password)');
+            $stmt = $this->pdo->prepare('call CreatePlayer(:alias, :nom, :prenom, :caps, :dexterite, :pointsDeVie, :poidsMax, :photo, :couleur, :email, :password);');
             $stmt->bindValue(':alias', $alias, PDO::PARAM_STR);
             $stmt->bindValue(':nom', $nom, PDO::PARAM_STR);
             $stmt->bindValue(':prenom', $prenom, PDO::PARAM_STR);
@@ -45,7 +45,9 @@ class PlayerModel {
                         $row['photo'],
                         $row['couleur'],
                         $row['email'],
-                        $row['password']
+                        $row['password'],
+                        $row['estAdmin'],
+                        $row['requestCount'] ?? 0
                     );
                 }
                 return $players;
@@ -62,7 +64,6 @@ class PlayerModel {
             $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
             $stm->execute();
             $data = $stm->fetch(PDO::FETCH_ASSOC);
-
             if (!empty($data)) {
                 return new Player(
                     $data['idJoueur'],
@@ -76,7 +77,9 @@ class PlayerModel {
                     $data['photo'],
                     $data['couleur'],
                     $data['email'],
-                    $data['pasword']
+                    $data['pasword'],
+                    $data['estAdmin'],
+                    $data['requestCount'] ?? 0
                 );
             }
             return null;
@@ -105,7 +108,9 @@ class PlayerModel {
                     $data['photo'],
                     $data['couleur'],
                     $data['email'],
-                    $data['pasword']
+                    $data['pasword'],
+                    $data['estAdmin'],
+                    $data['requestCount'] ?? 0
                 );
             }
             return null;
@@ -128,7 +133,8 @@ class PlayerModel {
                         'prixDeVente' => $row['prixDeVente'],
                         'nomItem' => $row['nomItem'],
                         'photo' => $row['photo'],
-                        'poids' => $row['poids']
+                        'poids' => $row['poids'],
+                        'type' => $row['itemType'],
                     ];
                 }
                 return $output;
@@ -232,13 +238,78 @@ class PlayerModel {
                     $data['photo'],
                     $data['couleur'],
                     $data['email'],
-                    $data['pasword']
+                    $data['pasword'],
+                    $data['estAdmin'],
+                    $data['requestCount'] ?? 0
                 );
             }
 
             return null;
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+    function sellItem(int $idJoueur, int $idItem, int $quantite): void {
+        try {
+            $stm = $this->pdo->prepare("call SellItem(?, ?, ?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->bindParam(2, $idItem);
+            $stm->bindParam(3, $quantite);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+    function consumeItem(int $idJoueur, int $idItem, int $quantite): void {
+        try {
+            $stm = $this->pdo->prepare("call ConsumeItem(?, ?, ?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->bindParam(2, $idItem);
+            $stm->bindParam(3, $quantite);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+
+    function AcceptRequest(int $idJoueur): void {
+        try {
+            $stm = $this->pdo->prepare("call AcceptRequest(?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+    function RefuseRequest(int $idJoueur): void {
+        try {
+            $stm = $this->pdo->prepare("call DenyRequest(?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+    function getAllRequest(): array|null {
+        try {
+            $stm = $this->pdo->prepare("call GetAllRequest();");
+            $stm->execute();
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+            if (!empty($data)) {
+                return $data;
+            }
+            return null;
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+    function requestCaps(int $idJoueur): void {
+        try {
+            $stm = $this->pdo->prepare("call AddRequest(?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
         }
     }
 }

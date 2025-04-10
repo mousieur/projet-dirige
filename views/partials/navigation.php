@@ -17,7 +17,7 @@
         $player = $playerModel->getPlayerById($_SESSION['idJoueur']);
         $alias = $player->alias;
         $caps = $player->caps;
-        
+        $isAdmin = $player->isAdmin;
     }
     sessionStart();
 ?>
@@ -56,6 +56,9 @@
                             <li><a class="dropdown-item" href="/inventory">Inventaire</a></li>
                             <li><a class="dropdown-item" href="/enigma">Enigma</a></li>
                             <li><a class="dropdown-item" href="/playerDetails">Paramètre du compte</a></li>
+                            <?php if($isAdmin){?>
+                                <li><a class="dropdown-item" href="/adminDemandesCaps">Demandes de Caps</a></li>
+                            <?php }?>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

@@ -14,6 +14,8 @@ class Player
         public string $photo,
         public string $couleur,
         public string $email,
-        public string $password
+        public string $password,
+        public bool $isAdmin,
+        public int $requestCount,
     ) {}
 }
