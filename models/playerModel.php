@@ -5,7 +5,7 @@ class PlayerModel {
 
     public function createUser(string $alias, string $nom, string $prenom, string $email, string $password): void {
         try {
-            $stmt = $this->pdo->prepare('call CreatePlayer(:alias, :nom, :prenom, :caps, :dexterite, :pointsDeVie, :poidsMax, :photo, :couleur, :email, :password)');
+            $stmt = $this->pdo->prepare('call CreatePlayer(:alias, :nom, :prenom, :caps, :dexterite, :pointsDeVie, :poidsMax, :photo, :couleur, :email, :password);');
             $stmt->bindValue(':alias', $alias, PDO::PARAM_STR);
             $stmt->bindValue(':nom', $nom, PDO::PARAM_STR);
             $stmt->bindValue(':prenom', $prenom, PDO::PARAM_STR);
@@ -64,7 +64,6 @@ class PlayerModel {
             $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
             $stm->execute();
             $data = $stm->fetch(PDO::FETCH_ASSOC);
-
             if (!empty($data)) {
                 return new Player(
                     $data['idJoueur'],
