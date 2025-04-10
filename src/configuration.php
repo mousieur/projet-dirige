@@ -4,9 +4,7 @@ const ROUTES = [
 
     '/' => 'index.php',
     '/erreur' => 'error.php',
-    '/connexion' => 'connection.php',
     '/create' => 'create.php',
-    '/deconnexion' => 'deconnection.php',
     '/error' => 'error.php',
     '/connection' => 'connection.php',
     '/deconnection' => 'deconnection.php',
@@ -15,7 +13,8 @@ const ROUTES = [
     '/updateCart' => 'updateCart.php',
     '/payCart' => 'payCart.php',
     '/inventory' => 'inventory.php',
-    '/playerDetails' => 'playerDetails.php'
+    '/playerDetails' => 'playerDetails.php',
+    '/enigma' => 'enigma.php',
 ];
 
 const DB_PARAMS = [

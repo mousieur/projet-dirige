@@ -54,7 +54,7 @@
                         <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end">
                             <?php if(!empty($alias)){?>
                             <li><a class="dropdown-item" href="/inventory">Inventaire</a></li>
-                            <li><a class="dropdown-item" href="#">Enigma</a></li>
+                            <li><a class="dropdown-item" href="/enigma">Enigma</a></li>
                             <li><a class="dropdown-item" href="/playerDetails">Paramètre du compte</a></li>
                             <li>
                                 <hr class="dropdown-divider">
