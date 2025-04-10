@@ -5,7 +5,7 @@ class PlayerModel {
 
     public function createUser(string $alias, string $nom, string $prenom, string $email, string $password): void {
         try {
-            $stmt = $this->pdo->prepare('call CreatePlayer(:alias, :nom, :prenom, :caps, :dexterite, :pointsDeVie, :poidsMax, :photo, :couleur, :email, :password)');
+            $stmt = $this->pdo->prepare('call CreatePlayer(:alias, :nom, :prenom, :caps, :dexterite, :pointsDeVie, :poidsMax, :photo, :couleur, :email, :password);');
             $stmt->bindValue(':alias', $alias, PDO::PARAM_STR);
             $stmt->bindValue(':nom', $nom, PDO::PARAM_STR);
             $stmt->bindValue(':prenom', $prenom, PDO::PARAM_STR);
@@ -47,7 +47,7 @@ class PlayerModel {
                         $row['email'],
                         $row['password'],
                         $row['estAdmin'],
-                        $row['requestCount']
+                        $row['requestCount'] ?? 0
                     );
                 }
                 return $players;
@@ -64,7 +64,6 @@ class PlayerModel {
             $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
             $stm->execute();
             $data = $stm->fetch(PDO::FETCH_ASSOC);
-
             if (!empty($data)) {
                 return new Player(
                     $data['idJoueur'],
@@ -80,7 +79,7 @@ class PlayerModel {
                     $data['email'],
                     $data['pasword'],
                     $data['estAdmin'],
-                    $data['requestCount']
+                    $data['requestCount'] ?? 0
                 );
             }
             return null;
@@ -111,7 +110,7 @@ class PlayerModel {
                     $data['email'],
                     $data['pasword'],
                     $data['estAdmin'],
-                    $data['requestCount']
+                    $data['requestCount'] ?? 0
                 );
             }
             return null;
@@ -241,7 +240,7 @@ class PlayerModel {
                     $data['email'],
                     $data['pasword'],
                     $data['estAdmin'],
-                    $data['requestCount']
+                    $data['requestCount'] ?? 0
                 );
             }
 
@@ -284,7 +283,7 @@ class PlayerModel {
     }
     function RefuseRequest(int $idJoueur): void {
         try {
-            $stm = $this->pdo->prepare("call RefuseRequest(?);");
+            $stm = $this->pdo->prepare("call DenyRequest(?);");
             $stm->bindParam(1, $idJoueur);
             $stm->execute();
         } catch (PDOException $e) {
