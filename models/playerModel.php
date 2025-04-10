@@ -313,4 +313,15 @@ class PlayerModel {
             throw new PDOException($e->getMessage(), 1);
         }
     }
+    function updateAvatar(int $idJoueur, string $image, string $couleur): void{
+        try {
+            $stm = $this->pdo->prepare("call UpdateAvatar(?, ?, ?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->bindParam(2, $image);
+            $stm->bindParam(3, $couleur);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
 }

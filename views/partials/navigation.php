@@ -18,10 +18,64 @@
         $alias = $player->alias;
         $caps = $player->caps;
         $isAdmin = $player->isAdmin;
+        $photo = $player->photo;
+        $couleur = $player->couleur;
+    }
+    else{
+        $photo = "fa-user";
+        $couleur = "pfp-black";
     }
     sessionStart();
 ?>
+<style>
+    .pfp-red {
+        color: red
+    }
 
+    .pfp-blue {
+        color: blue
+    }
+
+    .pfp-green {
+        color: green
+    }
+
+    .pfp-yellow {
+        color: yellow
+    }
+
+    .pfp-orange {
+        color: orange
+    }
+
+    .pfp-purple {
+        color: purple
+    }
+
+    .pfp-pink {
+        color: pink
+    }
+
+    .pfp-brown {
+        color: brown
+    }
+
+    .pfp-black {
+        color: black
+    }
+
+    .pfp-white {
+        color: white
+    }
+
+    .pfp-gray {
+        color: gray
+    }
+
+    .pfp-cyan {
+        color: cyan
+    }
+</style>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light shadow w-100 px-4">
         <div class="container-fluid d-flex justify-content-between align-items-center m-1">
@@ -49,7 +103,7 @@
                     endif?>
                     <div class="btn-group">
                         <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu">
-                            <i class="fa fa-fw fa-user text-dark fs-4"></i>
+                            <i class="fa fa-fw <?=$photo?> <?=$couleur?> fs-3"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end">
                             <?php if(!empty($alias)){?>
