@@ -112,6 +112,8 @@
                             <li><a class="dropdown-item" href="/playerDetails">Paramètre du compte</a></li>
                             <?php if($isAdmin){?>
                                 <li><a class="dropdown-item" href="/adminDemandesCaps">Demandes de Caps</a></li>
+                                <li><a class="dropdown-item" href="/createItem">Créer un Item</a></li>
+
                             <?php }?>
                             <li>
                                 <hr class="dropdown-divider">

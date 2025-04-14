@@ -20,6 +20,7 @@ const ROUTES = [
     '/updateAvatar' => 'updateAvatar.php',
     '/processRequest' => 'processRequest.php',
     '/enigma' => 'enigma.php',
+    '/createItem' => 'createItem.php',  
 ];
 
 const DB_PARAMS = [
