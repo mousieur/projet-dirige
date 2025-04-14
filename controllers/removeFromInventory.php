@@ -27,7 +27,12 @@ if($_GET['mode'] == "sell"){
                 $playerModel->sellItem($_GET['idJoueur'], $_GET['idItem'], $_GET['quantite']);
             }
             else{
-                $playerModel->sellItem($_GET['idJoueur'], $_GET['idItem'], $item['quantite']);
+                if($item['type'] == "Nourriture" || $item['type'] == "Medicament"){
+                    $playerModel->sellItem($_GET['idJoueur'], $_GET['idItem'], $item['quantite'] - 1);
+                }
+                else{
+                    $playerModel->sellItem($_GET['idJoueur'], $_GET['idItem'], $item['quantite']);
+                }
             }
         }
     }
