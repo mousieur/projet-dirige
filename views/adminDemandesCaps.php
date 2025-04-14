@@ -31,7 +31,9 @@ require_once 'views/partials/navigation.php';
                 <?php foreach ($demandes as $demande): ?>
                     <tr>
                         <td><?= htmlspecialchars($demande['alias'] ?? 'Inconnu') ?></td>
-                        <td><?= htmlspecialchars($demande['requestedCaps'] ?? '0') ?> caps</td>
+                        <td><?= htmlspecialchars($demande['requestedCaps'] ?? '0') ?> Caps</td>
+                        <td><?= htmlspecialchars($demande['solde'] ?? '0') ?> Solde</td>
+
                         <td>
                             <form method="post" action="/processRequest">
                                 <input type="hidden" name="idJoueur" value="<?= htmlspecialchars($demande['idJoueur'] ?? '') ?>">
