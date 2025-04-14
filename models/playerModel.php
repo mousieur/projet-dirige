@@ -296,7 +296,15 @@ class PlayerModel {
             $stm->execute();
             $data = $stm->fetchAll(PDO::FETCH_ASSOC);
             if (!empty($data)) {
-                return $data;
+                $output = [];
+                foreach ($data as $row) {
+                    $output[] = [
+                        'idJoueur' => $row['idJoueur'],
+                        'requestedCaps' => $row['requestedCaps'],
+                        'solde' => $row['caps'],
+                    ];
+                }
+                return $output;
             }
             return null;
         } catch (PDOException $e) {
