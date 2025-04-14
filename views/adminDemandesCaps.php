@@ -30,7 +30,7 @@ require_once 'views/partials/navigation.php';
             <?php else: ?>
                 <?php foreach ($demandes as $demande): ?>
                     <tr>
-                        <td><?= htmlspecialchars($demande['alias'] ?? 'Inconnu') ?></td>
+                        <td><?= htmlspecialchars($demande['alias'] ?? 'Inconnu')?></td>
                         <td><?= htmlspecialchars($demande['requestedCaps'] ?? '0') ?> caps</td>
                         <td>
                             <form method="post" action="/processRequest">
