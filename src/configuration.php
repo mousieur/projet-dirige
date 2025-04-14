@@ -21,6 +21,7 @@ const ROUTES = [
     '/processRequest' => 'processRequest.php',
     '/enigma' => 'enigma.php',
     '/createItem' => 'createItem.php',  
+    '/createEnigma' => 'createEnigma.php'
 ];
 
 const DB_PARAMS = [

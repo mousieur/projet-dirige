@@ -38,7 +38,8 @@ if ($item) {
                                 <span class="list-inline-item text-dark"> <?php echo htmlspecialchars($nbComments); ?>
                                     Comments</span>
                             </p>
-                            <p class="h3 py-2">Quantity in stock: <?php echo htmlspecialchars($item['quantiteStock']); ?></p>
+                            <p class="h3 py-2">Quantity in stock: <?php echo htmlspecialchars($item['quantiteStock']); ?>
+                            </p>
                             <h6>Description:</h6>
                             <p>Utility Value: <?php echo htmlspecialchars($item['utilite']); ?></p>
 
@@ -65,8 +66,7 @@ if ($item) {
                             <?php endif; ?>
 
                             <form method="GET" action="/updateCart">
-                                <input type="hidden" name="idItem"
-                                    value="<?php echo htmlspecialchars($item['idItem']); ?>">
+                                <input type="hidden" name="idItem" value="<?php echo htmlspecialchars($item['idItem']); ?>">
                                 <input type="hidden" name="product-title"
                                     value="<?php echo htmlspecialchars($item['nomItem']); ?>">
                                 <input type="hidden" id="quantiteStock"
@@ -76,7 +76,8 @@ if ($item) {
                                         <ul class="list-inline pb-3">
                                             <li class="list-inline-item text-right">
                                                 Quantity
-                                                <input class="form-control" type="number" name="val" style="width: 80px;" id="item-quantity" value="1">
+                                                <input class="form-control" type="number" name="val" style="width: 80px;"
+                                                    id="item-quantity" value="1">
                                             </li>
                                         </ul>
                                     </div>
@@ -94,6 +95,76 @@ if ($item) {
                 </div>
             </div>
         </div>
+        <div class="container mt-5">
+            <div class="row">
+                <!-- Left: Ratings Breakdown -->
+                <div class="col-md-4">
+                    <div class="mb-2">5 étoiles (60)
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-2">4 étoiles (20)
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width: 20%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-2">3 étoiles (10)
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width: 10%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-2">2 étoiles (5)
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width: 5%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-2">1 étoiles (5)
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width: 5%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+
+                    <!-- début commentaire -->
+                    <div class="comment-box mb-4">
+                        <div class="d-flex align-items-center mb-1">
+                            <i class="fas fa-user pfp-black fs-3"></i>
+                            <strong>Jane Doe</strong>
+                        </div>
+                        <div class="mb-1">
+                            <span class="text-warning"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i></span>
+                            <strong class="ms-2">Great Product</strong>
+                        </div>
+                        <div>
+                            I've been using this product for a few weeks and it's been working perfectly. Highly recommend
+                            it!
+                        </div>
+                    </div>
+                    <!-- fin commentaire -->
+                    <div class="comment-box mb-4">
+                        <div class="d-flex align-items-center mb-1">
+                            <i class="fas fa-user pfp-black fs-3"></i>
+                            <strong>John Smith</strong>
+                        </div>
+                        <div class="mb-1">
+                            <span class="text-warning"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i></span>
+                            <strong class="ms-2">Good but room for improvement</strong>
+                        </div>
+                        <div>
+                            The product is decent but there are a few bugs that need to be ironed out. Still worth the money
+                            though.
+                        </div>
+                    </div>
+
+                    <!-- Add more comments as needed -->
+
+                </div>
+            </div>
+        </div>
+
     </section>
     <?php
 } else {

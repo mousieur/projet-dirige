@@ -114,6 +114,7 @@
                                 <li><a class="dropdown-item" href="/adminDemandesCaps">Demandes de Caps</a></li>
                                 <li><a class="dropdown-item" href="/createItem">Créer un Item</a></li>
 
+                                <li><a class="dropdown-item" href="/createEnigma">Ajouter Énigme</a></li>
                             <?php }?>
                             <li>
                                 <hr class="dropdown-divider">
