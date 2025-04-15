@@ -10,18 +10,23 @@ $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $enigmeModel = new EnigmeModel($pdo);
 
-if (isset($_SESSION['enigmeNotSolved'])) {
+
+if (!isset($_SESSION['enigmeNotSolved'])) {
     $_SESSION['enigmeNotSolved'] = $enigmeModel->getAllIdEnigmes();
 }
 
+$text = "";
 $difficulty = $_GET['diff'] ?? null;
 $showAnswer = false;
 $changeAnswer = true;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $randomEnigme = $_SESSION['currentEnigme'];
+
     $chosenAnswer;
     foreach($randomEnigme->EnigmeAnswer as $answer) {
-        if($answer->idReponse == $_POST['answer']) {
+        if($answer->idResponse == $_POST['answer']) {
             $chosenAnswer = $answer;
             break;
         }
@@ -30,8 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($chosenAnswer->isCorrect) {
         //Add money
         if($randomEnigme->difficulty == 'f') {
-            //AddDifficultyStreak
+            $_SESSION['hardStreak']++;
+            if($_SESSION['hardStreak'] == 3) {
+                //Add more money
+            }
         }
+    } else {
+        $_SESSION['hardStreak']++;
     }
     $showAnswer = true;
     $changeAnswer = false;
@@ -50,14 +60,14 @@ if ($difficulty && $changeAnswer) {
 
         $randomEnigme = $enigmeModel->getEnigmeById($selectedEnigme->idEnigme);
 
+        $_SESSION['currentEnigme'] = $randomEnigme;
         $_SESSION['enigmeNotSolved'] = array_filter($_SESSION['enigmeNotSolved'], function($e) use ($selectedEnigme) {
             return $e->idEnigme !== $selectedEnigme->idEnigme;
         });
     } else {
-        redirect("/enigmaIntro");
+        $text = "Aucune enigme disponible pour cette difficulté.";
     }
 } else if (!$difficulty) {
     redirect("/");
 }
-
 require 'views/enigmaQuestions.php';

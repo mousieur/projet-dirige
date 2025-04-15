@@ -9,9 +9,8 @@ class enigmeModel {
         try {
             $result = $this->pdo->prepare("CALL GetAllEnigmesById;");
             $result->execute();
-
             $data = $result->fetchAll(PDO::FETCH_ASSOC);
-
+            
             if (!empty($data)) {
                 foreach ($data as $row) {
                     $enigmes[] = new EnigmeNotSolved(
@@ -25,6 +24,7 @@ class enigmeModel {
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), 1);
         }
+
     }
     public function GetEnigmeById($idEnigme) {
         $enigme = [];
@@ -47,9 +47,9 @@ class enigmeModel {
                 }
     
                 return new Enigme(
-                    $firstRow['idEnigme'],
-                    $firstRow['question'],
-                    $firstRow['difficulte'],
+                    $data[0]['idEnigme'],
+                    $data[0]['question'],
+                    $data[0]['difficulte'],
                     $answers
                 );
             }
