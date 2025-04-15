@@ -23,6 +23,7 @@ if($requests == null){
 foreach ($requests as $request) {
     if($request['idJoueur'] == $_SESSION['idJoueur']){
         $disable = true;
+        break;
     }
 }
 if($player->requestCount == 3){

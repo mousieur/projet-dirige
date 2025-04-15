@@ -16,10 +16,14 @@ const ROUTES = [
     '/playerDetails' => 'playerDetails.php',
     '/removeFromInventory' => 'removeFromInventory.php',
     '/adminDemandesCaps' => 'adminDemandesCaps.php',
-    '/requestCaps' => 'requestCaps.php', 
+    '/requestCaps' => 'requestCaps.php',
+    '/updateAvatar' => 'updateAvatar.php',
     '/processRequest' => 'processRequest.php',
     '/enigmaQuestions' => 'enigmaQuestions.php',
     '/enigmaIntro' => 'enigmaIntro.php',
+    '/enigma' => 'enigma.php',
+    '/createItem' => 'createItem.php',  
+    '/createEnigma' => 'createEnigma.php'
 ];
 
 const DB_PARAMS = [

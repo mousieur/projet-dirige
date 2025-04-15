@@ -296,7 +296,15 @@ class PlayerModel {
             $stm->execute();
             $data = $stm->fetchAll(PDO::FETCH_ASSOC);
             if (!empty($data)) {
-                return $data;
+                $output = [];
+                foreach ($data as $row) {
+                    $output[] = [
+                        'idJoueur' => $row['idJoueur'],
+                        'requestedCaps' => $row['requestedCaps'],
+                        'solde' => $row['caps'],
+                    ];
+                }
+                return $output;
             }
             return null;
         } catch (PDOException $e) {
@@ -307,6 +315,17 @@ class PlayerModel {
         try {
             $stm = $this->pdo->prepare("call AddRequest(?);");
             $stm->bindParam(1, $idJoueur);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+    function updateAvatar(int $idJoueur, string $image, string $couleur): void{
+        try {
+            $stm = $this->pdo->prepare("call UpdateAvatar(?, ?, ?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->bindParam(2, $image);
+            $stm->bindParam(3, $couleur);
             $stm->execute();
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), 1);
