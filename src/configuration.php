@@ -18,7 +18,8 @@ const ROUTES = [
     '/adminDemandesCaps' => 'adminDemandesCaps.php',
     '/requestCaps' => 'requestCaps.php', 
     '/processRequest' => 'processRequest.php',
-    '/enigma' => 'enigma.php',
+    '/enigmaQuestions' => 'enigmaQuestions.php',
+    '/enigmaIntro' => 'enigmaIntro.php',
 ];
 
 const DB_PARAMS = [
