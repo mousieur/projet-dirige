@@ -1,4 +1,8 @@
 <?php 
+sessionStart();
+if(!isset($_SESSION['idJoueur'])){
+    redirect('/');
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['f'])) {

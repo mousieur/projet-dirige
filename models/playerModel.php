@@ -331,4 +331,14 @@ class PlayerModel {
             throw new PDOException($e->getMessage(), 1);
         }
     }
+    function GiveMoneyById(int $idJoueur, int $money): void {
+        try {
+            $stm = $this->pdo->prepare("call GiveMoneyById(?, ?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->bindParam(2, $money);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
 }

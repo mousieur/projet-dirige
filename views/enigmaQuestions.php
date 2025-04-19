@@ -10,12 +10,17 @@ require 'partials/navigation.php';
     <form method="post">
       <h5 class="card-title mb-3 text-center" id="<?=$randomEnigme->idEnigme?>"><?=$randomEnigme->question?></h5>
       <div class="d-grid gap-2">
-        <?php foreach($randomEnigme->EnigmeAnswer as $answer) { ?>
-          <?php if(!$showAnswer){ ?>
-            <button type="submit" class="btn btn-outline-success w-100 mt-1" name="answer" value="<?=$answer->idResponse?>"><?=$answer->textResponse?></button>
-          <?php } else { ?>
-            <div type="button" class="btn <?php if($answer->isCorrect) { echo "btn-success w-100 mt-1"; } else { echo "btn-danger w-100 mt-1"; } ?>" disabled><?=$answer->textResponse?></div>
-          <?php } } ?>
+      <?php
+  $answers = $randomEnigme->EnigmeAnswer;
+  shuffle($answers); 
+  foreach($answers as $answer) {
+?>
+    <?php if(!$showAnswer){ ?>
+      <button type="submit" class="btn btn-outline-success w-100 mt-1" name="answer" value="<?=$answer->idResponse?>"><?=$answer->textResponse?></button>
+    <?php } else { ?>
+      <div type="button" class="btn <?php if($answer->isCorrect) { echo "btn-success w-100 mt-1"; } else { echo "btn-danger w-100 mt-1"; } ?>" disabled><?=$answer->textResponse?></div>
+    <?php } ?>
+<?php } ?>
       </div>
     </form>
     <?php } ?>

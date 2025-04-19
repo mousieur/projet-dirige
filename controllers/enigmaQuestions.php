@@ -6,6 +6,9 @@ require_once 'src/class/enigmeNotSolved.php';
 
 sessionStart();
 
+if(!isset($_SESSION['idJoueur'])){
+    redirect('/');
+}
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $enigmeModel = new EnigmeModel($pdo);
@@ -33,11 +36,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if($chosenAnswer->isCorrect) {
-        //Add money
-        if($randomEnigme->difficulty == 'f') {
-            $_SESSION['hardStreak']++;
-            if($_SESSION['hardStreak'] == 3) {
-                //Add more money
+        $playerModel = new PlayerModel($pdo);
+        $playerModel->GiveMoneyById($_SESSION['idJoueur'], $difficulty == 'd' ? 200 : ($difficulty == 'm' ? 100 : 50));
+        if($randomEnigme->difficulty == 'd') {
+            if(isset($_SESSION['hardStreak']))
+                $_SESSION['hardStreak']++;
+            else
+                $_SESSION['hardStreak'] = 1;
+
+            if($_SESSION['hardStreak'] === 3) {
+                $playerModel->GiveMoneyById($_SESSION['idJoueur'], 1000);
+                $_SESSION['hardStreak'] = 0;
+                $text = "Vous avez gagné 1000$ pour avoir répondu correctement à 3 énigmes difficiles consécutives !";
             }
         }
     } else {
