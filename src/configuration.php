@@ -19,7 +19,10 @@ const ROUTES = [
     '/requestCaps' => 'requestCaps.php',
     '/updateAvatar' => 'updateAvatar.php',
     '/processRequest' => 'processRequest.php',
+    '/enigmaQuestions' => 'enigmaQuestions.php',
+    '/enigmaIntro' => 'enigmaIntro.php',
     '/enigma' => 'enigma.php',
+    '/createItem' => 'createItem.php',  
     '/createEnigma' => 'createEnigma.php'
 ];
 

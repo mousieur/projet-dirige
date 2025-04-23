@@ -1,8 +1,12 @@
 <?php
-class ItemModel {
-    public function __construct(private PDO $pdo) {}
+class ItemModel
+{
+    public function __construct(private PDO $pdo)
+    {
+    }
 
-    public function selectAll(): array|null {
+    public function selectAll(): array|null
+    {
         $items = [];
 
         try {
@@ -29,7 +33,8 @@ class ItemModel {
             throw new PDOException($e->getMessage(), 1);
         }
     }
-    public function searchItemsByName(string $name): array|null {
+    public function searchItemsByName(string $name): array|null
+    {
         $items = [];
 
         try {
@@ -37,7 +42,7 @@ class ItemModel {
             $result->bindValue(":name", $name, PDO::PARAM_STR);
             $result->execute();
             $data = $result->fetchAll();
-            
+
             if (!empty($data)) {
                 foreach ($data as $row) {
                     $items[] = new Item(
@@ -60,7 +65,8 @@ class ItemModel {
     }
 
 
-    public function selectById(int $idItems): Item|null {
+    public function selectById(int $idItems): Item|null
+    {
         try {
             $stm = $this->pdo->prepare("SELECT idItem, nomItem, quantiteStock, itemType, prixUnitaire, poids, utilite, photo FROM Items WHERE idItem = :idItem");
             $stm->bindValue(":idItem", $idItems, PDO::PARAM_INT);
@@ -84,7 +90,8 @@ class ItemModel {
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
-    public function updateItemInPanier(int $idJoueur, int $idItem, int $quantite): void {
+    public function updateItemInPanier(int $idJoueur, int $idItem, int $quantite): void
+    {
         try {
             $stm = $this->pdo->prepare("call updateItemInPanier(?, ?, ?);");
             $stm->bindParam(1, $idJoueur);
@@ -96,7 +103,8 @@ class ItemModel {
         }
     }
 
-    public function getItemsByType(string $type): array|null {
+    public function getItemsByType(string $type): array|null
+    {
         $items = [];
 
         try {
@@ -125,7 +133,8 @@ class ItemModel {
             throw new PDOException($e->getMessage(), 1);
         }
     }
-    public function getItemsByTypes(array $types): array {
+    public function getItemsByTypes(array $types): array
+    {
         $items = [];
 
         try {
@@ -139,7 +148,7 @@ class ItemModel {
                     foreach ($data as $row) {
                         $items[] = new Item(
                             $row['idItem'],
-                            $row['nomItem'],                                                    
+                            $row['nomItem'],
                             $row['quantiteStock'],
                             $row['itemType'],
                             $row['prixUnitaire'],
@@ -155,7 +164,8 @@ class ItemModel {
             throw new PDOException($e->getMessage(), 1);
         }
     }
-    public function getItemDetailsByType(int $idItem, string $itemType) : array|null {
+    public function getItemDetailsByType(int $idItem, string $itemType): array|null
+    {
         try {
             switch ($itemType) {
                 case 'Arme':
@@ -184,4 +194,10 @@ class ItemModel {
         }
     }
 
+    public function moveUploadedPicture(string $destinationPath = ' ')
+    {
+        if (!empty($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+            move_uploaded_file($_FILES['image']['tmp_name'], $destinationPath . $_FILES['image']['name']);
+        };
+    }
 }

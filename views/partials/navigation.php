@@ -108,10 +108,12 @@
                         <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end">
                             <?php if(!empty($alias)){?>
                             <li><a class="dropdown-item" href="/inventory">Inventaire</a></li>
-                            <li><a class="dropdown-item" href="/enigma">Enigma</a></li>
+                            <li><a class="dropdown-item" href="/enigmaIntro">Enigma</a></li>
                             <li><a class="dropdown-item" href="/playerDetails">Paramètre du compte</a></li>
                             <?php if($isAdmin){?>
                                 <li><a class="dropdown-item" href="/adminDemandesCaps">Demandes de Caps</a></li>
+                                <li><a class="dropdown-item" href="/createItem">Créer un Item</a></li>
+
                                 <li><a class="dropdown-item" href="/createEnigma">Ajouter Énigme</a></li>
                             <?php }?>
                             <li>
