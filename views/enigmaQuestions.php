@@ -12,7 +12,15 @@ require 'partials/navigation.php';
       <div class="d-grid gap-2">
       <?php
   $answers = $randomEnigme->EnigmeAnswer;
-  shuffle($answers); 
+  if(!$showAnswer){
+    shuffle($answers); 
+    $_SESSION['enigmeShuffled'] = array_map(function($a) {
+      return $a;
+  }, $answers);
+  } else {
+    $answers = $_SESSION['enigmeShuffled'];
+  }
+
   foreach($answers as $answer) {
 ?>
     <?php if(!$showAnswer){ ?>
