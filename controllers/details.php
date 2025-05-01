@@ -33,7 +33,6 @@ if ($item_id > 0) {
         $itemDetails = (array) $itemDetails;
     }
 
-
     $comments = $commentModel->getCommentsByIdItem($item_id);
 
 } else {
@@ -56,6 +55,7 @@ if(isset($_SESSION['idJoueur'])){
     }
     $hasCommented = false;
     $comments = $commentModel->selectAll();
+
     foreach($comments as $comment){
         if($comment->idItem == $item_id && $comment->idJoueur == $_SESSION['idJoueur']){
             $hasCommented = true;
