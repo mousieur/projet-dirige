@@ -6,7 +6,7 @@ require_once 'src/class/comment.php';
 
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
-
+$commentModel = new CommentModel($pdo);
 $item_id = isset($_GET['idItem']) ? $_GET['idItem'] : 0;
 
 if ($item_id > 0) {
@@ -32,11 +32,32 @@ if ($item_id > 0) {
         $itemDetails = (array) $itemDetails;
     }
 
-    $commentModel = new CommentModel($pdo);
+
     $comments = $commentModel->getCommentsByIdItem($item_id);
 } else {
     $item = null;
     $comments = [];
 }
-// 
+
+$playerModel = new playerModel($pdo);
+$inventory = $playerModel->getInventaireById($_SESSION['idJoueur']);
+if($inventory == null){
+    $inventory = [];
+}
+$hasTheItem = false;
+foreach($inventory as $item){
+    if($item_id == $item['idItem']){
+        $hasTheItem = true;
+        break;
+    }
+}
+$hasCommented = false;
+$comments = $commentModel->selectAll();
+foreach($comments as $comment){
+    if($comment->idItem == $item_id && $comment->idJoueur == $_SESSION['idJoueur']){
+        $hasCommented = true;
+        break;
+    }
+}
+$canComment = $hasTheItem && !$hasCommented;
 require 'views/details.php';
