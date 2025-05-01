@@ -200,4 +200,68 @@ class ItemModel
             move_uploaded_file($_FILES['image']['tmp_name'], $destinationPath . $_FILES['image']['name']);
         };
     }
+    
+    public function CreateItem(array $itemData): void
+    {
+        try {
+            $this->pdo->beginTransaction();
+
+            switch ($itemData['itemType']) {
+                case 'Arme':
+                    $stm = $this->pdo->prepare("CALL CreateArme(:nomItem, :quantiteStock, :prixUnitaire, :poids, :utilite, :photo, :flagDispo, :efficacite, :typeArme, :description)");
+                    $stm->bindValue(':efficacite', $itemData['dynamicFields']['efficacite'], PDO::PARAM_INT);
+                    $stm->bindValue(':typeArme', $itemData['dynamicFields']['typeArme'], PDO::PARAM_STR);
+                    $stm->bindValue(':description', $itemData['dynamicFields']['description'], PDO::PARAM_STR);
+                    break;
+
+                case 'Munition':
+                    $stm = $this->pdo->prepare("CALL CreateMunition(:nomItem, :quantiteStock, :prixUnitaire, :poids, :utilite, :photo, :flagDispo, :calibre)");
+                    $stm->bindValue(':calibre', $itemData['dynamicFields']['calibre'], PDO::PARAM_STR);
+                    break;
+
+                case 'Armure':
+                    $stm = $this->pdo->prepare("CALL CreateArmure(:nomItem, :quantiteStock, :prixUnitaire, :poids, :utilite, :photo, :flagDispo, :composite, :taille)");
+                    $stm->bindValue(':composite', $itemData['dynamicFields']['composite'], PDO::PARAM_STR);
+                    $stm->bindValue(':taille', $itemData['dynamicFields']['taille'], PDO::PARAM_STR);
+                    break;
+
+                case 'Nourriture':
+                    $stm = $this->pdo->prepare("CALL CreateNourriture(:nomItem, :quantiteStock, :prixUnitaire, :poids, :utilite, :photo, :flagDispo, :apportCalorique, :composantNutritif, :mineralPrincipal, :ptsVie)");
+                    $stm->bindValue(':apportCalorique', $itemData['dynamicFields']['apportCalorique'], PDO::PARAM_INT);
+                    $stm->bindValue(':composantNutritif', $itemData['dynamicFields']['composantNutritif'], PDO::PARAM_STR);
+                    $stm->bindValue(':mineralPrincipal', $itemData['dynamicFields']['mineralPrincipal'], PDO::PARAM_STR);
+                    $stm->bindValue(':ptsVie', $itemData['dynamicFields']['ptsVie'], PDO::PARAM_INT);
+                    break;
+
+                case 'Medicament':
+                    $stm = $this->pdo->prepare("CALL CreateMedicament(:nomItem, :quantiteStock, :prixUnitaire, :poids, :utilite, :photo, :flagDispo, :attendu, :duree, :indesirable, :ptsVie)");
+                    $stm->bindValue(':attendu', $itemData['dynamicFields']['attendu'], PDO::PARAM_STR);
+                    $stm->bindValue(':duree', $itemData['dynamicFields']['duree'], PDO::PARAM_INT);
+                    $stm->bindValue(':indesirable', $itemData['dynamicFields']['indesirable'], PDO::PARAM_STR);
+                    $stm->bindValue(':ptsVie', $itemData['dynamicFields']['ptsVie'], PDO::PARAM_INT);
+                    break;
+
+                default:
+                    throw new Exception("Type d'item invalide.");
+            }
+
+
+            $stm->bindValue(':nomItem', $itemData['nomItem'], PDO::PARAM_STR);
+            $stm->bindValue(':quantiteStock', $itemData['quantiteStock'], PDO::PARAM_INT);
+            $stm->bindValue(':prixUnitaire', $itemData['prixUnitaire'], PDO::PARAM_INT);
+            $stm->bindValue(':poids', $itemData['poids'], PDO::PARAM_STR);
+            $stm->bindValue(':utilite', $itemData['utilite'], PDO::PARAM_INT);
+            $stm->bindValue(':photo', $itemData['photo'], PDO::PARAM_STR);
+            $stm->bindValue(':flagDispo', 1, PDO::PARAM_INT); 
+
+            $stm->execute();
+            $this->pdo->commit();
+        } catch (PDOException $e) {
+            $this->pdo->rollBack();
+            throw new PDOException($e->getMessage(), $e->getCode());
+        } catch (Exception $e) {
+            $this->pdo->rollBack();
+            throw $e;
+        }
+    }
 }
