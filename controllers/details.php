@@ -55,7 +55,7 @@ if(isset($_SESSION['idJoueur'])){
     }
     $hasCommented = false;
     $comments = $commentModel->selectAll();
-
+    $comments = $comments != null ? $comments : [];
     foreach($comments as $comment){
         if($comment->idItem == $item_id && $comment->idJoueur == $_SESSION['idJoueur']){
             $hasCommented = true;
