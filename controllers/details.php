@@ -3,6 +3,7 @@ require_once 'models/itemModel.php';
 require_once 'models/commentModel.php';
 require_once 'src/class/item.php';
 require_once 'src/class/comment.php';
+sessionStart();
 
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
@@ -38,26 +39,29 @@ if ($item_id > 0) {
     $item = null;
     $comments = [];
 }
+$canComment = false;
+if(isset($_SESSION['idJoueur'])){
+    $playerModel = new playerModel($pdo);
+    $inventory = $playerModel->getInventaireById($_SESSION['idJoueur']);
+    if($inventory == null){
+        $inventory = [];
+    }
+    $hasTheItem = false;
+    foreach($inventory as $item){
+        if($item_id == $item['idItem']){
+            $hasTheItem = true;
+            break;
+        }
+    }
+    $hasCommented = false;
+    $comments = $commentModel->selectAll();
+    foreach($comments as $comment){
+        if($comment->idItem == $item_id && $comment->idJoueur == $_SESSION['idJoueur']){
+            $hasCommented = true;
+            break;
+        }
+    }
+    $canComment = $hasTheItem && !$hasCommented;
+}
 
-$playerModel = new playerModel($pdo);
-$inventory = $playerModel->getInventaireById($_SESSION['idJoueur']);
-if($inventory == null){
-    $inventory = [];
-}
-$hasTheItem = false;
-foreach($inventory as $item){
-    if($item_id == $item['idItem']){
-        $hasTheItem = true;
-        break;
-    }
-}
-$hasCommented = false;
-$comments = $commentModel->selectAll();
-foreach($comments as $comment){
-    if($comment->idItem == $item_id && $comment->idJoueur == $_SESSION['idJoueur']){
-        $hasCommented = true;
-        break;
-    }
-}
-$canComment = $hasTheItem && !$hasCommented;
 require 'views/details.php';

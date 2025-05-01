@@ -125,22 +125,18 @@ if ($item) {
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="col-md-8">
-
+                    <h3 class="fw-bold">Ajouter un commentaire</h3>
                     <!-- début commentaire -->
                     <div class="comment-box mb-4">
-                        <div class="d-flex align-items-center mb-1">
-                            <i class="fas fa-user pfp-black fs-3"></i>
-                            <strong>Jane Doe</strong>
-                        </div>
-                        <div class="mb-1">
-                            <span class="text-warning"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i></span>
-                            <strong class="ms-2">Great Product</strong>
+                        <div class="mb-1 rating-stars"></div>
+                        <input type="hidden" name="rating" id="rating-value" value="0">
+                        <div>
+                            <input type="text" name="titre" class="form-control" placeholder="titre" required>
                         </div>
                         <div>
-                            I've been using this product for a few weeks and it's been working perfectly. Highly recommend
-                            it!
+                            <textarea name="description" class="form-control" placeholder="description" required></textarea>
                         </div>
                     </div>
                     <!-- fin commentaire -->
@@ -150,7 +146,9 @@ if ($item) {
                             <strong>John Smith</strong>
                         </div>
                         <div class="mb-1">
-                            <span class="text-warning"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i></span>
+                            <span class="text-warning"><i class="fa fa-star text-warning"></i><i
+                                    class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i
+                                    class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i></span>
                             <strong class="ms-2">Good but room for improvement</strong>
                         </div>
                         <div>
@@ -166,6 +164,34 @@ if ($item) {
         </div>
 
     </section>
+    <script>
+        const starsContainer = document.querySelector('.rating-stars');
+        const ratingInput = document.getElementById('rating-value');
+        let currentRating = 0;
+
+        for (let i = 1; i <= 5; i++) {
+            const star = document.createElement('i');
+            star.classList.add('fa', 'fa-star', 'text-secondary', 'me-1');
+            star.dataset.value = i;
+
+            star.addEventListener('click', function () {
+                currentRating = i;
+                ratingInput.value = i;
+                updateStars();
+            });
+
+            starsContainer.appendChild(star);
+        }
+
+        function updateStars() {
+            const stars = starsContainer.querySelectorAll('i');
+            stars.forEach(star => {
+                const starValue = parseInt(star.dataset.value);
+                star.classList.toggle('text-warning', starValue <= currentRating);
+                star.classList.toggle('text-secondary', starValue > currentRating);
+            });
+        }
+    </script>
     <?php
 } else {
     echo "<p>Product ID is invalid ou not found</p>";
