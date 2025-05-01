@@ -340,6 +340,8 @@ class PlayerModel {
             $stm->bindParam(4, $MReponse1);
             $stm->bindParam(5, $MReponse2);
             $stm->bindParam(6, $MReponse3);
+        }catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
         }
     }
     function GiveMoneyById(int $idJoueur, int $money): void {
