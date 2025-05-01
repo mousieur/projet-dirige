@@ -51,7 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     } else {
-        $_SESSION['hardStreak']++;
+        if(isset($_SESSION['hardStreak'])) {
+            unset($_SESSION['hardStreak']);
+        }
     }
     $showAnswer = true;
     $changeAnswer = false;
