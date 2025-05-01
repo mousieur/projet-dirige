@@ -34,9 +34,9 @@ if ($item_id > 0) {
 
     $commentModel = new CommentModel($pdo);
     $comments = $commentModel->getCommentsByIdItem($item_id);
+
 } else {
     $item = null;
     $comments = [];
 }
-// 
 require 'views/details.php';
