@@ -35,6 +35,7 @@ if ($item_id > 0) {
 
 
     $comments = $commentModel->getCommentsByIdItem($item_id);
+
 } else {
     $item = null;
     $comments = [];
