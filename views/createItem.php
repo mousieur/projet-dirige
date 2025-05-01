@@ -11,6 +11,12 @@ require 'partials/navigation.php';
                     <div class="card-body">
                         <h2 class="card-title text-center">Ajouter un Item</h2>
 
+                        <?php if (!empty($message)): ?>
+                            <div class="alert alert-info">
+                                <?= htmlspecialchars($message) ?>
+                            </div>
+                        <?php endif; ?>
+
                         <?php if (!empty($errors)): ?>
                             <div class="alert alert-danger">
                                 <ul>
@@ -21,7 +27,7 @@ require 'partials/navigation.php';
                             </div>
                         <?php endif; ?>
 
-                        <form action="/createItem" method="POST" enctype="multipart/form-data">
+                        <form action="/AddingItem" method="POST" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="nomItem" class="form-label">Nom de l'Item</label>
                                 <input type="text" class="form-control" id="nomItem" name="nomItem" 
@@ -52,6 +58,11 @@ require 'partials/navigation.php';
                                 <label for="poids" class="form-label">Poids</label>
                                 <input type="number" step="0.01" class="form-control" id="poids" name="poids" 
                                     value="<?= htmlspecialchars($_POST['poids'] ?? '') ?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="utilite" class="form-label">Utilité</label>
+                                <input type="number" class="form-control" id="utilite" name="utilite" 
+                                    value="<?= htmlspecialchars($_POST['utilite'] ?? '') ?>" required>
                             </div>
 
                             <div id="dynamicFields"></div>
@@ -122,6 +133,10 @@ require 'partials/navigation.php';
                     <label for="composantNutritif" class="form-label">Composant Nutritif</label>
                     <input type="text" class="form-control" id="composantNutritif" name="composantNutritif" required>
                 </div>
+                <div class="mb-3">
+                    <label for="mineralPrincipal" class="form-label">Minéral Principal</label>
+                    <input type="text" class="form-control" id="mineralPrincipal" name="mineralPrincipal" required>
+                </div>
             `;
         } else if (itemType === 'Medicament') {
             dynamicFields.innerHTML = `
@@ -135,7 +150,7 @@ require 'partials/navigation.php';
                 </div>
                 <div class="mb-3">
                     <label for="duree" class="form-label">Durée</label>
-                    <input type="text" class="form-control" id="duree" name="duree" required>
+                    <input type="number" class="form-control" id="duree" name="duree" required>
                 </div>
                 <div class="mb-3">
                     <label for="indesirable" class="form-label">Effets Indésirables</label>
