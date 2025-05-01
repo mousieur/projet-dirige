@@ -10,23 +10,23 @@ require 'partials/navigation.php';
                 <div class="card mt-5 my-5">
                     <div class="card-body">
                         <h2 class="card-title text-center">Créer une Énigme</h2>
-
-                        <form action="/create" method="POST">
+                        <form action="/createEnigma" method="POST">
+                            <h4 class="text-success"><?=$_SESSION['messageCreateEnigme']?></h4>
                             <div class="mb-3">
                                 <label class="form-label">Difficulté</label><br>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="difficulte" id="facile"
-                                        value="facile">
+                                        value="f">
                                     <label class="form-check-label" for="facile">Facile</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="difficulte" id="moyen"
-                                        value="moyen">
+                                        value="m">
                                     <label class="form-check-label" for="moyen">Moyen</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="difficulte" id="difficile"
-                                        value="difficile">
+                                        value="d">
                                     <label class="form-check-label" for="difficile">Difficile</label>
                                 </div>
                             </div>
