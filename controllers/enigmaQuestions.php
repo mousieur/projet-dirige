@@ -34,10 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
         }
     }
+    $enigmeDifficulty = $randomEnigme->difficulty;
+    $playerModel = new PlayerModel($pdo);
 
     if($chosenAnswer->isCorrect) {
-        $playerModel = new PlayerModel($pdo);
-        $playerModel->GiveMoneyById($_SESSION['idJoueur'], $difficulty == 'd' ? 200 : ($difficulty == 'm' ? 100 : 50));
+        $playerModel->GiveMoneyById($_SESSION['idJoueur'], $enigmeDifficulty == 'd' ? 200 : ($enigmeDifficulty == 'm' ? 100 : 50));
         if($randomEnigme->difficulty == 'd') {
             if(isset($_SESSION['hardStreak']))
                 $_SESSION['hardStreak']++;
@@ -54,6 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if(isset($_SESSION['hardStreak'])) {
             unset($_SESSION['hardStreak']);
         }
+        $playerModel->LoseHealth($_SESSION['idJoueur'], $enigmeDifficulty == 'd' ? 10 : ($enigmeDifficulty == 'm' ? 6 : 3));
+
     }
     $showAnswer = true;
     $changeAnswer = false;
