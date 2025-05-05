@@ -53,4 +53,19 @@ if($_GET['mode'] == "consume"){
     }
 
 }
+if($_GET['mode'] == "drop"){
+    foreach ($inventory as $item) {
+        if($item['idItem'] == $_GET['idItem']){
+            if($item['quantite'] > 1){
+                if($item['quantite'] > $_GET['quantite']){
+                    $playerModel->dropItem($_GET['idJoueur'], $_GET['idItem'], $_GET['quantite']);
+                }
+                else{
+                    $playerModel->dropItem($_GET['idJoueur'], $_GET['idItem'], $item['quantite'] - 1);
+                }
+            }
+        }
+    }
+
+}
 redirect('/inventory');
