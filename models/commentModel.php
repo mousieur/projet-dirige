@@ -58,5 +58,18 @@ class CommentModel {
             throw new PDOException($e->getMessage(), 1);
         }
     }
-    
+    function createComment(int $idItem, int $idJoueur, string $titre, string $commentaire, int $etoiles): void {
+        try {
+            $stm = $this->pdo->prepare("CALL CreateCommentaire(?, ?, ?, ?, ?)");
+            $stm->bindParam(1, $idItem, PDO::PARAM_INT);
+            $stm->bindParam(2, $idJoueur, PDO::PARAM_INT);
+            $stm->bindParam(3, $titre, PDO::PARAM_STR);
+            $stm->bindParam(4, $commentaire, PDO::PARAM_STR);
+            $stm->bindParam(5, $etoiles, PDO::PARAM_INT);
+
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
 }

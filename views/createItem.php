@@ -27,7 +27,7 @@ require 'partials/navigation.php';
                             </div>
                         <?php endif; ?>
 
-                        <form action="/AddingItem" method="POST" enctype="multipart/form-data">
+                        <form action="/createItem" method="POST" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="nomItem" class="form-label">Nom de l'Item</label>
                                 <input type="text" class="form-control" id="nomItem" name="nomItem" 

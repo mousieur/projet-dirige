@@ -23,7 +23,8 @@ const ROUTES = [
     '/enigmaIntro' => 'enigmaIntro.php',
     '/enigma' => 'enigma.php',
     '/createItem' => 'createItem.php',  
-    '/createEnigma' => 'createEnigma.php'
+    '/createEnigma' => 'createEnigma.php',
+    '/createComment' => 'createComment.php',
 ];
 
 const DB_PARAMS = [
