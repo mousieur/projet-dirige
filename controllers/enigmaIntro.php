@@ -5,13 +5,16 @@ if(!isset($_SESSION['idJoueur'])){
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $difficulty = 'r';
     if (isset($_POST['f'])) {
-        redirect('enigmaQuestions?diff=f');
+        $difficulty = 'f';
     } elseif (isset($_POST['m'])) {
-        redirect('enigmaQuestions?diff=m');
+        $difficulty = 'm';
     } elseif (isset($_POST['d'])) {
-        redirect('enigmaQuestions?diff=d');
+        $difficulty = 'd';
     }
+    
+    redirect('enigmaQuestions?diff=' . $difficulty);
 }
 
 require 'views/enigmaIntro.php';
