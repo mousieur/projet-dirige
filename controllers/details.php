@@ -33,7 +33,6 @@ if ($item_id > 0) {
         $itemDetails = (array) $itemDetails;
     }
 
-
     $comments = $commentModel->getCommentsByIdItem($item_id);
 
 } else {
