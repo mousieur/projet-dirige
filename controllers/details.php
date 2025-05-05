@@ -40,6 +40,7 @@ if ($item_id > 0) {
     $item = null;
     $comments = [];
 }
+
 $canComment = false;
 if(isset($_SESSION['idJoueur'])){
     $playerModel = new playerModel($pdo);
@@ -48,16 +49,16 @@ if(isset($_SESSION['idJoueur'])){
         $inventory = [];
     }
     $hasTheItem = false;
-    foreach($inventory as $item){
-        if($item_id == $item['idItem']){
+    foreach($inventory as $inv){
+        if($item_id == $inv['idItem']){
             $hasTheItem = true;
             break;
         }
     }
     $hasCommented = false;
-    $comments = $commentModel->selectAll();
-    $comments = $comments != null ? $comments : [];
-    foreach($comments as $comment){
+    $checkComments = $commentModel->selectAll();
+    $checkComments = $checkComments != null ? $comments : [];
+    foreach($checkComments as $comment){
         if($comment->idItem == $item_id && $comment->idJoueur == $_SESSION['idJoueur']){
             $hasCommented = true;
             break;
