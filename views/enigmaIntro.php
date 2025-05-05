@@ -11,6 +11,7 @@ require 'partials/navigation.php';
             <input type="submit" id="f" name="f" class="btn btn-outline-success w-100 mt-1" value="Difficulté facile">
             <input type="submit" id="m" name="m" class="btn btn-outline-success w-100 mt-1" value="Difficulté moyenne">
             <input type="submit" id="d" name="d" class="btn btn-outline-success w-100 mt-1" value="Difficulté difficile">
+            <input type="submit" id="r" name="r" class="btn btn-outline-success w-100 mt-1" value="Difficulté au hasard">
       </form>
     </div>
   </div>

@@ -44,10 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             else
                 $_SESSION['hardStreak'] = 1;
 
-            if($_SESSION['hardStreak'] === 3) {
+            if($_SESSION['hardStreak'] % 3 == 0) {
                 $playerModel->GiveMoneyById($_SESSION['idJoueur'], 1000);
                 $_SESSION['hardStreak'] = 0;
-                $text = "Vous avez gagné 1000$ pour avoir répondu correctement à 3 énigmes difficiles consécutives !";
+                $text = "Vous avez gagné 1000$ pour avoir répondu correctement à " . $_SESSION['hardStreak'] . "énigmes difficiles consécutives !";
             }
         }
     } else {
@@ -60,9 +60,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 if ($difficulty && $changeAnswer) {
-    $filteredEnigmes = array_filter($_SESSION['enigmeNotSolved'], function($enigme) use ($difficulty) {
-        return $enigme->difficulty === $difficulty;
-    });
+    if($difficulty != 'r') {
+        $filteredEnigmes = array_filter($_SESSION['enigmeNotSolved'], function($enigme) use ($difficulty) {
+            return $enigme->difficulty === $difficulty;
+        });
+    } else {
+        $filteredEnigmes = $_SESSION['enigmeNotSolved'];
+    }
 
     if (!empty($filteredEnigmes)) {
         $filteredEnigmes = array_values($filteredEnigmes);

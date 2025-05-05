@@ -194,11 +194,24 @@ class ItemModel
         }
     }
 
-    public function moveUploadedPicture(string $destinationPath = ' ')
+    public function moveUploadedPicture(string $destinationPath = 'public/img/')
     {
-        if (!empty($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
-            move_uploaded_file($_FILES['image']['tmp_name'], $destinationPath . $_FILES['image']['name']);
-        };
+        if (!empty($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
+            if (!is_dir($destinationPath)) {
+                mkdir($destinationPath, 0777, true);
+            }
+
+            $uniqueFileName = uniqid() . '_' . basename($_FILES['photo']['name']);
+            $targetFilePath = $destinationPath . $uniqueFileName;
+
+            if (move_uploaded_file($_FILES['photo']['tmp_name'], $targetFilePath)) {
+                return $uniqueFileName; 
+            } else {
+                throw new Exception("Failed to upload the image.");
+            }
+        } else {
+            throw new Exception("No valid image uploaded.");
+        }
     }
     
     public function CreateItem(array $itemData): void
