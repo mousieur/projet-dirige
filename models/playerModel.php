@@ -273,7 +273,7 @@ class PlayerModel {
     }
     function dropItem(int $idJoueur, int $idItem, int $quantite): void {
         try {
-            $stm = $this->pdo->prepare("call DropItem(?, ?, ?);");
+            $stm = $this->pdo->prepare("call JeterCetItemSpecifiquementAvecSonIdEtLaQuantiteSpecifier(?, ?, ?);");
             $stm->bindParam(1, $idJoueur);
             $stm->bindParam(2, $idItem);
             $stm->bindParam(3, $quantite);
@@ -350,6 +350,7 @@ class PlayerModel {
             $stm->bindParam(4, $MReponse1);
             $stm->bindParam(5, $MReponse2);
             $stm->bindParam(6, $MReponse3);
+            $stm->execute();
         }catch (PDOException $e) {
             throw new PDOException($e->getMessage(), 1);
         }

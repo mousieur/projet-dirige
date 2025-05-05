@@ -56,16 +56,18 @@ if($_GET['mode'] == "consume"){
 if($_GET['mode'] == "drop"){
     foreach ($inventory as $item) {
         if($item['idItem'] == $_GET['idItem']){
-            if($item['quantite'] > 1){
-                if($item['quantite'] > $_GET['quantite']){
-                    $playerModel->dropItem($_GET['idJoueur'], $_GET['idItem'], $_GET['quantite']);
+            if($item['quantite'] > $_GET['quantite']){
+                $playerModel->dropItem($_GET['idJoueur'], $_GET['idItem'], $_GET['quantite']);
+            }
+            else{
+                if($item['type'] == "Nourriture" || $item['type'] == "Medicament"){
+                    $playerModel->dropItem($_GET['idJoueur'], $_GET['idItem'], $item['quantite'] - 1);
                 }
                 else{
-                    $playerModel->dropItem($_GET['idJoueur'], $_GET['idItem'], $item['quantite'] - 1);
+                    $playerModel->dropItem($_GET['idJoueur'], $_GET['idItem'], $item['quantite']);
                 }
             }
         }
     }
-
 }
 redirect('/inventory');
