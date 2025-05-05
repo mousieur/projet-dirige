@@ -42,6 +42,8 @@ require 'partials/navigation.php';
                                 <?php endif; ?>
                                 <button type="submit" class="btn btn-danger w-100 mx-2" name="mode"
                                     value="sell">Vendre</button>
+                                <button type="submit" class="btn btn-warning w-100 mx-2" name="mode"
+                                    value="drop">Jeter</button>
                             </div>
                         </form>
                     </div>
