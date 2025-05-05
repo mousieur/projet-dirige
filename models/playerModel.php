@@ -354,9 +354,9 @@ class PlayerModel {
             throw new PDOException($e->getMessage(), 1);
         }
     }
-    function LoseHealthById(int $idJoueur, int $damage) {
+    function LoseHealth(int $idJoueur, int $damage) {
         try {
-            $stm = $this->pdo->prepare("call LoseHealthById(?, ?);");
+            $stm = $this->pdo->prepare("call LoseHealth(?, ?);");
             $stm->bindParam(1, $idJoueur);
             $stm->bindParam(2, $damage);
             $stm->execute();
