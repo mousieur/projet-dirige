@@ -125,20 +125,28 @@ if ($item) {
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-8">
-                    <h3 class="fw-bold">Ajouter un commentaire</h3>
-                    <!-- début commentaire -->
-                    <div class="comment-box mb-4">
-                        <div class="mb-1 rating-stars"></div>
-                        <input type="hidden" name="rating" id="rating-value" value="0">
-                        <div>
-                            <input type="text" name="titre" class="form-control" placeholder="titre" required>
-                        </div>
-                        <div>
-                            <textarea name="description" class="form-control" placeholder="description" required></textarea>
-                        </div>
-                    </div>
+                    <?php if ($canComment): ?>
+                        <h3 class="fw-bold">Ajouter un commentaire</h3>
+                        <!-- début commentaire -->
+                        <form action="/createComment" method="POST">
+                            <div class="comment-box mb-4">
+                                <div class="mb-1 rating-stars"></div>
+                                <input type="hidden" name="rating" id="rating-value" value="1">
+                                <input type="hidden" name="idItem" value="<?php echo htmlspecialchars($item['idItem']); ?>">
+                                <input type="hidden" name="idJoueur" value="<?php echo htmlspecialchars($_SESSION['idJoueur']); ?>">
+                                <div>
+                                    <input type="text" name="titre" class="form-control" placeholder="titre" required>
+                                </div>
+                                <div>
+                                    <textarea name="description" class="form-control mb-2" placeholder="description"
+                                        required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success">Envoyer</button>
+                            </div>
+                        </form>
+                    <?php endif ?>
                     <!-- fin commentaire -->
                     <div class="comment-box mb-4">
                         <div class="d-flex align-items-center mb-1">
@@ -173,7 +181,9 @@ if ($item) {
             const star = document.createElement('i');
             star.classList.add('fa', 'fa-star', 'text-secondary', 'me-1');
             star.dataset.value = i;
-
+            if(i == 1){
+                star.classList.add('text-warning');
+            }
             star.addEventListener('click', function () {
                 currentRating = i;
                 ratingInput.value = i;
