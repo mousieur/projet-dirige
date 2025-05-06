@@ -271,7 +271,17 @@ class PlayerModel {
             throw new PDOException($e->getMessage(), 1);
         }
     }
-
+    function dropItem(int $idJoueur, int $idItem, int $quantite): void {
+        try {
+            $stm = $this->pdo->prepare("call JeterCetItemSpecifiquementAvecSonIdEtLaQuantiteSpecifier(?, ?, ?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->bindParam(2, $idItem);
+            $stm->bindParam(3, $quantite);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
     function AcceptRequest(int $idJoueur): void {
         try {
             $stm = $this->pdo->prepare("call AcceptRequest(?);");
@@ -340,6 +350,7 @@ class PlayerModel {
             $stm->bindParam(4, $MReponse1);
             $stm->bindParam(5, $MReponse2);
             $stm->bindParam(6, $MReponse3);
+            $stm->execute();
         }catch (PDOException $e) {
             throw new PDOException($e->getMessage(), 1);
         }
@@ -349,6 +360,16 @@ class PlayerModel {
             $stm = $this->pdo->prepare("call GiveMoneyById(?, ?);");
             $stm->bindParam(1, $idJoueur);
             $stm->bindParam(2, $money);
+            $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+    function LoseHealth(int $idJoueur, int $damage) {
+        try {
+            $stm = $this->pdo->prepare("call LoseHealth(?, ?);");
+            $stm->bindParam(1, $idJoueur);
+            $stm->bindParam(2, $damage);
             $stm->execute();
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), 1);

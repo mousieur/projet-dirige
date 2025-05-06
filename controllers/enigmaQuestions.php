@@ -34,35 +34,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
         }
     }
+    $enigmeDifficulty = $randomEnigme->difficulty;
+    $playerModel = new PlayerModel($pdo);
 
     if($chosenAnswer->isCorrect) {
-        $playerModel = new PlayerModel($pdo);
-        $playerModel->GiveMoneyById($_SESSION['idJoueur'], $difficulty == 'd' ? 200 : ($difficulty == 'm' ? 100 : 50));
+        $playerModel->GiveMoneyById($_SESSION['idJoueur'], $enigmeDifficulty == 'd' ? 200 : ($enigmeDifficulty == 'm' ? 100 : 50));
         if($randomEnigme->difficulty == 'd') {
             if(isset($_SESSION['hardStreak']))
                 $_SESSION['hardStreak']++;
             else
                 $_SESSION['hardStreak'] = 1;
 
-            if($_SESSION['hardStreak'] === 3) {
+            if($_SESSION['hardStreak'] % 3 == 0) {
                 $playerModel->GiveMoneyById($_SESSION['idJoueur'], 1000);
                 $_SESSION['hardStreak'] = 0;
-                $text = "Vous avez gagné 1000$ pour avoir répondu correctement à 3 énigmes difficiles consécutives !";
+                $text = "Vous avez gagné 1000$ pour avoir répondu correctement à " . $_SESSION['hardStreak'] . "énigmes difficiles consécutives !";
             }
         }
     } else {
         if(isset($_SESSION['hardStreak'])) {
             unset($_SESSION['hardStreak']);
         }
+        $playerModel->LoseHealth($_SESSION['idJoueur'], $enigmeDifficulty == 'd' ? 10 : ($enigmeDifficulty == 'm' ? 6 : 3));
+
     }
     $showAnswer = true;
     $changeAnswer = false;
 }
 
 if ($difficulty && $changeAnswer) {
-    $filteredEnigmes = array_filter($_SESSION['enigmeNotSolved'], function($enigme) use ($difficulty) {
-        return $enigme->difficulty === $difficulty;
-    });
+    if($difficulty != 'r') {
+        $filteredEnigmes = array_filter($_SESSION['enigmeNotSolved'], function($enigme) use ($difficulty) {
+            return $enigme->difficulty === $difficulty;
+        });
+    } else {
+        $filteredEnigmes = $_SESSION['enigmeNotSolved'];
+    }
 
     if (!empty($filteredEnigmes)) {
         $filteredEnigmes = array_values($filteredEnigmes);
