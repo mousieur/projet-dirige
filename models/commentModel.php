@@ -20,7 +20,10 @@ class CommentModel {
                         $row['titre'],
                         $row['commentaire'],
                         $row['date'],
-                        $row['etoiles']
+                        $row['etoiles'],
+                        $row['photo'] ?? 'fa-user', 
+                        $row['alias'] ?? 'Anonyme', 
+                        $row['couleur'] ?? 'pfp-gray'
                     );
                 }
                 return $commentaires;
@@ -48,7 +51,10 @@ class CommentModel {
                         $row['titre'],
                         $row['commentaire'],
                         $row['date'],
-                        $row['etoiles']
+                        $row['etoiles'],
+                        $row['photo'] ?? 'fa-user', 
+                        $row['alias'] ?? 'Anonyme', 
+                        $row['couleur'] ?? 'pfp-gray'
                     );
                 }
                 return $commentaires;
@@ -68,6 +74,16 @@ class CommentModel {
             $stm->bindParam(5, $etoiles, PDO::PARAM_INT);
 
             $stm->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), 1);
+        }
+    }
+    public function deleteComment(int $idItem, int $idJoueur): void {
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM Commentaires WHERE idItem = :idItem AND idJoueur = :idJoueur");
+            $stmt->bindValue(':idItem', $idItem, PDO::PARAM_INT);
+            $stmt->bindValue(':idJoueur', $idJoueur, PDO::PARAM_INT);
+            $stmt->execute();
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), 1);
         }

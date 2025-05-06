@@ -7,7 +7,10 @@ class Commentaire
         public string $titre,
         public string $commentaire,
         public string $date,
-        public int $etoiles
+        public int $etoiles,
+        public ?string $photo = 'fa-user',
+        public ?string $alias = 'Anonyme',
+        public ?string $couleur = 'pfp-gray',
     ) {}
 
     public function getEtoiles(): int {

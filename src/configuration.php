@@ -25,6 +25,7 @@ const ROUTES = [
     '/createItem' => 'createItem.php',  
     '/createEnigma' => 'createEnigma.php',
     '/createComment' => 'createComment.php',
+    '/deleteComment' => 'deleteComment.php',
 ];
 
 const DB_PARAMS = [

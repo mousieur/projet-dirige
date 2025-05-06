@@ -97,33 +97,21 @@ if ($item) {
         </div>
         <div class="container mt-5">
             <div class="row">
-                <!-- Left: Ratings Breakdown -->
                 <div class="col-md-4">
-                    <div class="mb-2">5 étoiles (60)
-                        <div class="progress">
-                            <div class="progress-bar bg-success" style="width: 60%"></div>
+                    <h4>Ratings</h4>
+                    <?php
+                    $ratingsBreakdown = [5 => 0, 4 => 0, 3 => 0, 2 => 0, 1 => 0];
+                    foreach ($comments as $comment) {
+                        $ratingsBreakdown[$comment->getEtoiles()]++;
+                    }
+                    foreach ($ratingsBreakdown as $stars => $count): ?>
+                        <div class="mb-2"><?php echo $stars; ?> étoiles (<?php echo $count; ?>)
+                            <div class="progress">
+                                <div class="progress-bar bg-success"
+                                    style="width: <?php echo ($nbComments > 0) ? ($count / $nbComments) * 100 : 0; ?>%"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-2">4 étoiles (20)
-                        <div class="progress">
-                            <div class="progress-bar bg-success" style="width: 20%"></div>
-                        </div>
-                    </div>
-                    <div class="mb-2">3 étoiles (10)
-                        <div class="progress">
-                            <div class="progress-bar bg-success" style="width: 10%"></div>
-                        </div>
-                    </div>
-                    <div class="mb-2">2 étoiles (5)
-                        <div class="progress">
-                            <div class="progress-bar bg-success" style="width: 5%"></div>
-                        </div>
-                    </div>
-                    <div class="mb-2">1 étoiles (5)
-                        <div class="progress">
-                            <div class="progress-bar bg-success" style="width: 5%"></div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
 
                 <div class="col-md-8">
@@ -135,7 +123,8 @@ if ($item) {
                                 <div class="mb-1 rating-stars"></div>
                                 <input type="hidden" name="rating" id="rating-value" value="1">
                                 <input type="hidden" name="idItem" value="<?php echo htmlspecialchars($item['idItem']); ?>">
-                                <input type="hidden" name="idJoueur" value="<?php echo htmlspecialchars($_SESSION['idJoueur']); ?>">
+                                <input type="hidden" name="idJoueur"
+                                    value="<?php echo htmlspecialchars($_SESSION['idJoueur']); ?>">
                                 <div>
                                     <input type="text" name="titre" class="form-control" placeholder="titre" required>
                                 </div>
@@ -147,26 +136,46 @@ if ($item) {
                             </div>
                         </form>
                     <?php endif ?>
-                    <!-- fin commentaire -->
-                    <div class="comment-box mb-4">
-                        <div class="d-flex align-items-center mb-1">
-                            <i class="fas fa-user pfp-black fs-3"></i>
-                            <strong>John Smith</strong>
-                        </div>
-                        <div class="mb-1">
-                            <span class="text-warning"><i class="fa fa-star text-warning"></i><i
-                                    class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i
-                                    class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i></span>
-                            <strong class="ms-2">Good but room for improvement</strong>
-                        </div>
-                        <div>
-                            The product is decent but there are a few bugs that need to be ironed out. Still worth the money
-                            though.
-                        </div>
+                    <div class="comment-section mt-4">
+                        <h3 class="fw-bold">Commentaires</h3>
+                        <?php if (!empty($comments)): ?>
+                            <?php foreach ($comments as $comment): ?>
+                                <div class="comment-box mb-4">
+                                    <div class="d-flex align-items-center mb-1">
+                                        <i
+                                            class="fa fa-fw <?php echo htmlspecialchars($comment->photo); ?> <?php echo htmlspecialchars($comment->couleur); ?> fs-3 me-2"></i>
+                                        <strong><?php echo htmlspecialchars($comment->alias); ?></strong>
+                                        <?php if (isset($isAdmin) && $isAdmin || $comment->idJoueur == $_SESSION["idJoueur"]): ?>
+                                        <a class="btn fs-3"
+                                            href="/deleteComment?idItem=<?= $comment->idItem ?>&idJoueur=<?= $comment->idJoueur ?>">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    <?php endif; ?>
+                                    </div>
+                                    <div class="mb-1">
+                                        <span class="text-warning fs-4">
+                                            <?php for ($i = 1; $i <= 5; $i++): ?>
+                                                <i
+                                                    class="fa fa-star <?php echo $i <= $comment->getEtoiles() ? 'text-warning' : 'text-secondary'; ?>"></i>
+                                            <?php endfor; ?>
+                                        </span>
+                                        <strong class="ms-2 fs-3"><?php echo htmlspecialchars($comment->titre); ?></strong>
+                                    </div>
+
+                                    <div>
+                                        <?php echo htmlspecialchars($comment->commentaire); ?>
+                                    </div>
+
+                                    <div class="text-muted">
+                                        <small>Posté le : <?php echo htmlspecialchars($comment->date); ?></small>
+                                    </div>
+
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p>Aucun commentaire pour cet article.</p>
+                        <?php endif; ?>
                     </div>
-
-                    <!-- Add more comments as needed -->
-
                 </div>
             </div>
         </div>
@@ -181,7 +190,7 @@ if ($item) {
             const star = document.createElement('i');
             star.classList.add('fa', 'fa-star', 'text-secondary', 'me-1');
             star.dataset.value = i;
-            if(i == 1){
+            if (i == 1) {
                 star.classList.add('text-warning');
             }
             star.addEventListener('click', function () {
